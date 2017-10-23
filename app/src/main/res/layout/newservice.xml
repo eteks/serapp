@@ -163,5 +163,13 @@
         android:layout_alignBaseline="@+id/textView13"
         android:layout_alignBottom="@+id/textView13"
         android:layout_alignStart="@+id/textView15" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView16"
+        android:layout_toEndOf="@+id/textView7"
+        android:text="Next" />
 </RelativeLayout>
 
