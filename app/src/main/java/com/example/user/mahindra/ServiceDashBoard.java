@@ -12,7 +12,7 @@ public class ServiceDashBoard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.service_dashboard);
-        Button newservices = (Button) findViewById(R.id.newservice);
+        Button newservices = (Button) findViewById(R.id.re_service);
         newservices.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view)
