@@ -19,16 +19,11 @@
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold" />
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/textView28"
-        android:layout_alignStart="@+id/checkBox6">
+
     <TextView
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
         android:text="Interior / Exterior"
         android:textSize="16sp"
         />
@@ -46,10 +41,10 @@
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView16"
+        android:layout_marginTop="13dp"
+        android:text="Check the doors"
         android:layout_below="@+id/textView16"
-        android:layout_marginTop="23dp"
-        android:text="Check the doors" />
+        android:layout_alignStart="@+id/textView16" />
 
     <TextView
         android:id="@+id/textView19"
@@ -64,7 +59,7 @@
         android:id="@+id/textView20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="10dp"
         android:text="Engine / Chasis"
         android:textSize="16sp"
         android:layout_below="@+id/textView19"
@@ -90,25 +85,24 @@
         android:id="@+id/textView23"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="23dp"
         android:text="Check battery fluid"
-        android:layout_below="@+id/textView21"
-        android:layout_alignStart="@+id/textView24" />
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/textView21" />
 
     <TextView
         android:id="@+id/textView24"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
+        android:layout_marginTop="10dp"
         android:text="Check coolant oil"
         android:layout_below="@+id/textView23"
-        android:layout_toEndOf="@+id/textView21" />
+        android:layout_alignStart="@+id/textView23" />
 
     <TextView
         android:id="@+id/textView26"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="12dp"
         android:text="Road Test"
         android:textSize="16sp"
         android:layout_below="@+id/textView24"
@@ -127,10 +121,10 @@
         android:id="@+id/textView28"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:text="Check engine performance"
         android:layout_below="@+id/textView27"
-        android:layout_marginTop="21dp"
-        android:layout_toEndOf="@+id/textView21"
-        android:text="Check engine performance" />
+        android:layout_toEndOf="@+id/textView21" />
 
     <TextView
         android:id="@+id/textView29"
@@ -206,11 +200,12 @@
         android:layout_alignStart="@+id/checkBox8" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/services"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Submit"
         android:layout_below="@+id/textView29"
         android:layout_toEndOf="@+id/textView20"
-        android:text="Submit" />
-    </ScrollView>
+        />
+
 </RelativeLayout>

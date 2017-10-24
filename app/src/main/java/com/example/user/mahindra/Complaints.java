@@ -1,7 +1,10 @@
 package com.example.user.mahindra;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 
 public class Complaints extends AppCompatActivity {
@@ -10,5 +13,14 @@ public class Complaints extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.complaints);
+        Button newservices = (Button) findViewById(R.id.services);
+        newservices.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view)
+            {
+                Intent i = new Intent(Complaints.this,ServiceStatus.class);
+                startActivity(i);
+            }
+        });
     }
 }

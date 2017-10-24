@@ -1,5 +1,6 @@
 package com.example.user.mahindra;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -7,6 +8,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+
+import android.view.*;
+import android.widget.Button;
 
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -33,6 +38,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String sSelected=parent.getItemAtPosition(position).toString();
         Toast.makeText(this,sSelected,Toast.LENGTH_SHORT).show();
+
+        Button login = (Button) findViewById(R.id.login);
+        login.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view)
+            {
+                Intent i = new Intent(MainActivity.this,ServiceDashBoard.class);
+                       startActivity(i);
+            }
+        });
+
     }
 
     public void onNothingSelected(AdapterView<?> parent) {

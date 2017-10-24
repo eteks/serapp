@@ -164,7 +164,7 @@
         android:layout_alignStart="@+id/checkBox3" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/re_service"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="17dp"

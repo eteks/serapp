@@ -16,6 +16,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ServiceDashBoard"></activity>
+        <activity android:name=".NewService"></activity>
+        <activity android:name=".Complaints"></activity>
+        <activity android:name=".ServiceStatus"></activity>
+        <activity android:name=".QualityDasboard"></activity>
+        <activity android:name=".QualityStatus"></activity>
+        <activity android:name=".ReserviceStatus"></activity>
+
     </application>
 
 </manifest>

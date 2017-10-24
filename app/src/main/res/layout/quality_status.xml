@@ -190,7 +190,7 @@
         android:duplicateParentState="false" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/re_service"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -202,8 +202,8 @@
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button2"
-        android:layout_alignBottom="@+id/button2"
+        android:layout_alignBaseline="@+id/re_service"
+        android:layout_alignBottom="@+id/re_service"
         android:layout_alignEnd="@+id/checkBox9"
         android:text="Delivery" />
 
