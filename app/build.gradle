@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-
 android {
     compileSdkVersion 25
     buildToolsVersion "26.0.2"
@@ -33,6 +32,8 @@ dependencies {
     compile 'com.microsoft.azure:azure-mobile-android:3.2.0@aar'
     compile 'com.microsoft.azure:azure-notifications-handler:1.0.1@jar'
     compile files('src/libs/azure-mobile-android-3.3.0.jar')
+    //compile 'com.microsoft.azure:azure-storage:6.0.0'
+
 }
 
 buildscript {

@@ -26,8 +26,7 @@
         android:layout_height="wrap_content"
         android:text="Interior / Exterior"
         android:textSize="16sp"
-        android:layout_below="@+id/textView5"
-        android:layout_toStartOf="@+id/textView5" />
+        />
 
     <TextView
         android:id="@+id/textView16"
@@ -35,8 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="23dp"
         android:text="Check parking brake"
-        android:layout_below="@+id/textView15"
-        android:layout_alignStart="@+id/textView15"
+
         android:layout_marginStart="32dp" />
 
     <TextView
@@ -207,7 +205,7 @@
         android:layout_height="wrap_content"
         android:text="Submit"
         android:layout_below="@+id/textView29"
-        android:layout_alignEnd="@+id/textView28"
-        android:layout_marginTop="13dp" />
+        android:layout_toEndOf="@+id/textView20"
+        />
 
 </RelativeLayout>
