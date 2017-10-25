@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        System.out.println(item);
+        //System.out.println(item);
         //mClient.getTable(ToDoItem.class).insert(item.get())
     }
 
