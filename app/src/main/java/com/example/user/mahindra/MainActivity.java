@@ -31,14 +31,17 @@ import java.util.concurrent.TimeUnit;
 import static com.example.user.mahindra.R.id.clientPassword;
 import static com.example.user.mahindra.R.id.clientUsername;
 import static com.microsoft.windowsazure.mobileservices.table.query.QueryOperations.val;
-
+//For Push Notification
+import com.microsoft.windowsazure.notifications.NotificationsManager;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private MobileServiceClient mClient;
+//    private MobileServiceClient mClient;
+    public static MobileServiceClient mClient;
     private EditText clientUsername;
     private EditText clientPassword;
     private EditText clientUsertype;
+    public static final String SENDER_ID = "973440221227";
     //private MobileServiceTable mTable;
 
 //    ToDoItem item = new ToDoItem();
@@ -87,6 +90,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 return client;
             }
         });
+
+//        NotificationsManager.handleNotifications(this, SENDER_ID, MyHandler.class);
 //        MobileServiceTable<UsersAuth> mTable = mClient.getTable("user_auth", UsersAuth.class);
 //        try {
 //            final List<UsersAuth> result =  mTable.where().field("username").eq("admin").execute().get();
@@ -191,8 +196,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 MobileServiceTable<vehicle> mTable = mClient.getTable("vehicle", vehicle.class);
                 final vehicle item = new vehicle();
                 item.reg_no = "PY 01 C 1234";
-                item.eng_no = "BSRT4568N";
-                item.col_code = "Grey";
+                item.eng_no = "BSRT1234N";
+                item.col_code = "Blue";
 ////        mClient.getTable(vehicle.class).insert(item, new TableOperationCallback<item>() {
 ////            public void onCompleted(vehicle entity, Exception exception, ServiceFilterResponse response) {
 ////                if (exception == null) {
@@ -212,6 +217,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
+        Button notification = (Button) findViewById(R.id.notification);
+        notification.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view)
+            {
+                NotificationsManager.handleNotifications(MainActivity.this, SENDER_ID, MyHandler.class);
+            }
+        });
     }
 
 
