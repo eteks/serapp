@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -36,13 +37,17 @@ import static com.example.user.mahindra.R.id.clientUsername;
 import static com.microsoft.windowsazure.mobileservices.table.query.QueryOperations.val;
 import static java.util.logging.Level.parse;
 
+//For Push Notification
+import com.microsoft.windowsazure.notifications.NotificationsManager;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private MobileServiceClient mClient;
+//    private MobileServiceClient mClient;
+    public static MobileServiceClient mClient;
     private EditText clientUsername;
     private EditText clientPassword;
     private EditText clientUsertype;
+//    public static final String SENDER_ID = "973440221227";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +81,22 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 return client;
             }
         });
+
+//        NotificationsManager.handleNotifications(this, SENDER_ID, MyHandler.class);
+//        MobileServiceTable<UsersAuth> mTable = mClient.getTable("user_auth", UsersAuth.class);
+//        try {
+//            final List<UsersAuth> result =  mTable.where().field("username").eq("admin").execute().get();
+//            for (UsersAuth item : result) {
+//                System.out.println(result);
+//            }
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        } catch (ExecutionException e) {
+//            e.printStackTrace();
+//        }
+
+        //System.out.println(item);
+        //mClient.getTable(ToDoItem.class).insert(item.get())
     }
 
 
@@ -124,6 +145,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Button login = (Button) findViewById(R.id.login);
         login.setOnClickListener(new View.OnClickListener(){
             int ONE_TIME = 0;
+            @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
             @Override
             public void onClick(View view) {
                 ONE_TIME++;
@@ -197,6 +219,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         });
 
+//        Button notification = (Button) findViewById(R.id.notification);
+//        notification.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View view)
+//            {
+//                NotificationsManager.handleNotifications(MainActivity.this, SENDER_ID, MyHandler.class);
+//            }
+//        });
     }
 
     public void showDialogBox(){
