@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context="com.example.user.mahindra.Complaints"
     >
-
    <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
@@ -16,195 +15,28 @@
         android:layout_marginTop="17dp"
         android:text="Complaints"
         android:textAlignment="center"
+        android:textColor="@android:color/black"
         android:textSize="18sp"
         android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/textView15"
-        android:layout_width="wrap_content"
+    <ListView
+        android:id="@+id/listViewToDo"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Interior / Exterior"
-        android:textSize="16sp"
-        />
+        tools:listitem="@layout/checkable_list_layout"
+        android:padding="6dip"
+        android:layout_above="@+id/re_service"
+        android:layout_marginBottom="49dp"
+        android:layout_below="@+id/textView5"
+        android:layout_marginTop="19dp">
 
-    <TextView
-        android:id="@+id/textView16"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="23dp"
-        android:text="Check parking brake"
-
-        android:layout_marginStart="32dp" />
-
-    <TextView
-        android:id="@+id/textView18"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
-        android:text="Check the doors"
-        android:layout_below="@+id/textView16"
-        android:layout_alignStart="@+id/textView16" />
-
-    <TextView
-        android:id="@+id/textView19"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView18"
-        android:layout_below="@+id/textView18"
-        android:layout_marginTop="23dp"
-        android:text="Check wiper nozzle" />
-
-    <TextView
-        android:id="@+id/textView20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Engine / Chasis"
-        android:textSize="16sp"
-        android:layout_below="@+id/textView19"
-        android:layout_alignEnd="@+id/textView15" />
-
-    <TextView
-        android:id="@+id/textView21"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView19"
-        android:layout_below="@+id/textView20"
-        android:layout_marginTop="16dp" />
-
-    <TextView
-        android:id="@+id/textView22"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/textView21"
-        android:layout_toEndOf="@+id/textView21"
-        android:text="Check drive belt" />
-
-    <TextView
-        android:id="@+id/textView23"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Check battery fluid"
-        android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/textView21" />
-
-    <TextView
-        android:id="@+id/textView24"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Check coolant oil"
-        android:layout_below="@+id/textView23"
-        android:layout_alignStart="@+id/textView23" />
-
-    <TextView
-        android:id="@+id/textView26"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Road Test"
-        android:textSize="16sp"
-        android:layout_below="@+id/textView24"
-        android:layout_alignStart="@+id/textView20" />
-
-    <TextView
-        android:id="@+id/textView27"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView24"
-        android:layout_below="@+id/textView26"
-        android:layout_marginTop="13dp"
-        android:text="Check whell balance" />
-
-    <TextView
-        android:id="@+id/textView28"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
-        android:text="Check engine performance"
-        android:layout_below="@+id/textView27"
-        android:layout_toEndOf="@+id/textView21" />
-
-    <TextView
-        android:id="@+id/textView29"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Check wheel alignment"
-        android:layout_below="@+id/textView28"
-        android:layout_toEndOf="@+id/textView21"
-        android:layout_marginTop="18dp" />
-
-    <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView16"
-        android:layout_toEndOf="@+id/textView5"
-        android:layout_marginStart="49dp" />
-
-    <CheckBox
-        android:id="@+id/checkBox2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/textView19"
-        android:layout_alignStart="@+id/checkBox" />
-
-    <CheckBox
-        android:id="@+id/checkBox3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView19"
-        android:layout_alignStart="@+id/checkBox2" />
-
-    <CheckBox
-        android:id="@+id/checkBox4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView22"
-        android:layout_alignStart="@+id/checkBox3" />
-
-    <CheckBox
-        android:id="@+id/checkBox5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView23"
-        android:layout_alignStart="@+id/checkBox4" />
-
-    <CheckBox
-        android:id="@+id/checkBox6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView24"
-        android:layout_alignStart="@+id/checkBox5" />
-
-    <CheckBox
-        android:id="@+id/checkBox7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/textView28"
-        android:layout_alignStart="@+id/checkBox6" />
-
-    <CheckBox
-        android:id="@+id/checkBox8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView28"
-        android:layout_alignStart="@+id/checkBox7" />
-
-    <CheckBox
-        android:id="@+id/checkBox9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView29"
-        android:layout_alignStart="@+id/checkBox8" />
+    </ListView>
 
     <Button
-        android:id="@+id/services"
+        android:id="@+id/re_service"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Submit"
-        android:layout_below="@+id/textView29"
-        android:layout_toEndOf="@+id/textView20"
-        />
-
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="19dp"
+        android:text="Submit" />
 </RelativeLayout>

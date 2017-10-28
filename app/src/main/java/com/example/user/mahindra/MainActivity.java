@@ -15,18 +15,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.EditText;
-
-
 import android.view.*;
 import android.widget.Button;
-
 import com.microsoft.windowsazure.mobileservices.*;
 import com.microsoft.windowsazure.mobileservices.http.OkHttpClientFactory;
 import com.microsoft.windowsazure.mobileservices.http.ServiceFilterResponse;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 import com.microsoft.windowsazure.mobileservices.table.serialization.JsonEntityParser;
 import com.squareup.okhttp.OkHttpClient;
-
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -79,22 +75,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public static Boolean isVisible = false;
     private GoogleCloudMessaging gcm;
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
-
-    //private MobileServiceTable mTable;
-
-//    ToDoItem item = new ToDoItem();
-//    item.Text = "Awesome item";
-//        mClient.getTable(ToDoItem.class).insert(item, new TableOperationCallback<item>() {
-//        public void onCompleted(ToDoItem entity, Exception exception, ServiceFilterResponse response) {
-//            if (exception == null) {
-//                // Insert succeeded
-//                System.out.println('Insert success');
-//            } else {
-//                // Insert failed
-//                System.out.println("Insert failed");
-//            }
-//        }
-//    })
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -186,12 +166,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         clientUsername = (EditText) findViewById(R.id.clientUsername);
         clientPassword = (EditText) findViewById(R.id.clientPassword);
         //clientUsertype = (EditText) findViewById(R.id.clientUsertype);
-
         Button login = (Button) findViewById(R.id.login);
         login.setOnClickListener(new View.OnClickListener() {
             int ONE_TIME = 0;
-
-            @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
             @Override
             public void onClick(View view) {
                 ONE_TIME++;
