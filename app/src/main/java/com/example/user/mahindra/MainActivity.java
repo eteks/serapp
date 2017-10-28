@@ -186,13 +186,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 //                runAsyncTask(task);
 
 
-                //Intent i = new Intent(MainActivity.this,ServiceDashBoard.class);
-                //startActivity(i);
-                MobileServiceTable<vehicle> mTable = mClient.getTable("vehicle", vehicle.class);
-                final vehicle item = new vehicle();
-                item.reg_no = "PY 01 C 1234";
-                item.eng_no = "BSRT4568N";
-                item.col_code = "Grey";
+                Intent i = new Intent(MainActivity.this,ServiceDashBoard.class);
+                startActivity(i);
+//                MobileServiceTable<vehicle> mTable = mClient.getTable("vehicle", vehicle.class);
+//                final vehicle item = new vehicle();
+//                item.reg_no = "PY 01 C 1234";
+//                item.eng_no = "BSRT4568N";
+//                item.col_code = "Grey";
 ////        mClient.getTable(vehicle.class).insert(item, new TableOperationCallback<item>() {
 ////            public void onCompleted(vehicle entity, Exception exception, ServiceFilterResponse response) {
 ////                if (exception == null) {
@@ -202,13 +202,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 ////                }
 ////            }
 ////        });
-                try {
-                    vehicle entity = mClient.getTable(vehicle.class).insert(item).get();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    vehicle entity = mClient.getTable(vehicle.class).insert(item).get();
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                } catch (ExecutionException e) {
+//                    e.printStackTrace();
+//                }
             }
         });
 

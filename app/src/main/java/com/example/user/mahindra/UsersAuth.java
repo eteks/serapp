@@ -14,7 +14,5 @@ public class UsersAuth {
     @com.google.gson.annotations.SerializedName("usertype")
     public String usertype;
 
-
-
 }
 
