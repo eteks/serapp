@@ -1,7 +1,6 @@
 package com.example.user.mahindra;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -18,11 +17,11 @@ public class ServiceDashBoard extends AppCompatActivity {
         setContentView(R.layout.service_dashboard);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.custom_toolbar);
         setSupportActionBar(myToolbar);
-        Button newservices = (Button) findViewById(R.id.re_service);
+        Button newservices = (Button) findViewById(R.id.username);
         newservices.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ServiceDashBoard.this, NewService.class);
+                Intent i = new Intent(ServiceDashBoard.this, ServiceDashBoard.class);
                 startActivity(i);
             }
         });
@@ -33,7 +32,7 @@ public class ServiceDashBoard extends AppCompatActivity {
                 finish();
             }
         });
-        TextView test = (TextView)findViewById(R.id.username);
+        TextView test = (TextView)findViewById(R.id.username1);
         String username = getIntent().getStringExtra("username");
         test.setText(username);
     }
