@@ -74,5 +74,11 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="21dp" />
 
+    <!--<TextView-->
+        <!--android:id="@+id/text_hello"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:text="@string/common_google_play_services_notification_ticker" />-->
+
 
 </RelativeLayout>

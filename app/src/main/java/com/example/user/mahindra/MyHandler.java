@@ -43,18 +43,20 @@ public class MyHandler extends NotificationsHandler {
 
     @Override
     public void onReceive(Context context, Bundle bundle) {
-        System.out.println("Entered into onreceive function");
-        String msg = bundle.getString("message");
+        System.out.println("Entered into received function");
+//        String msg = bundle.getString("message");
+        String msg = "New service has been registered for this vehicle number";
 
         PendingIntent contentIntent = PendingIntent.getActivity(context,
                 0, // requestCode
-                new Intent(context, MainActivity.class),
+//                new Intent(context, MainActivity.class),
+                new Intent("tywele.remindme.ACTION_EVENT_TIME"),
                 0); // flags
 
         Notification notification = new NotificationCompat.Builder(context)
 //                .setSmallIcon(R.drawable.ic_launcher)
-//                .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("Notification Hub Demo")
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle("Vehicle Service Registration Status")
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
                 .setContentText(msg)
                 .setContentIntent(contentIntent)
