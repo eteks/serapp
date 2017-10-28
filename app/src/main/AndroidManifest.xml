@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.user.mahindra">
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-sdk android:minSdkVersion="8" />
     <!-- For Push Notification -->
     <permission android:name="com.example.user.mahindra.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
@@ -32,6 +33,12 @@
         <activity android:name=".QualityDasboard"></activity>
         <activity android:name=".QualityStatus"></activity>
         <activity android:name=".ReserviceStatus"></activity>
+
+        <!--<receiver android:name=".MyHandler" android:enabled="true">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="tywele.remindme.ACTION_EVENT_TIME" />-->
+            <!--</intent-filter>-->
+        <!--</receiver>-->
         <!-- For Push Notification -->
         <receiver android:name="com.microsoft.windowsazure.notifications.NotificationsBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND">

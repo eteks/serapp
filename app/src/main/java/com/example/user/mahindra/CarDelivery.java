@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 
 public class CarDelivery extends AppCompatActivity {
@@ -15,7 +16,7 @@ public class CarDelivery extends AppCompatActivity {
         setContentView(R.layout.car_delivery);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.custom_toolbar);
         setSupportActionBar(myToolbar);
-        Button logout = (Button) findViewById(R.id.logout);
+        ImageButton logout = (ImageButton) findViewById(R.id.logout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
