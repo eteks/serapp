@@ -2,14 +2,24 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.user.mahindra">
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-sdk android:minSdkVersion="8" />
+    <!-- For Push Notification -->
+    <permission android:name="com.example.user.mahindra.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="com.example.user.mahindra.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        android:background="?attr/colorPrimary"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+    <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,6 +34,21 @@
         <activity android:name=".QualityStatus"></activity>
         <activity android:name=".ReserviceStatus"></activity>
 
+        <!--<receiver android:name=".MyHandler" android:enabled="true">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="tywele.remindme.ACTION_EVENT_TIME" />-->
+            <!--</intent-filter>-->
+        <!--</receiver>-->
+        <!-- For Push Notification -->
+        <receiver android:name="com.microsoft.windowsazure.notifications.NotificationsBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+                <category android:name="com.example.user.mahindra" />
+            </intent-filter>
+        </receiver>
     </application>
+
 
 </manifest>

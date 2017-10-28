@@ -1,6 +1,5 @@
 package com.example.user.mahindra;
 
-
 import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.List;
@@ -69,7 +68,7 @@ public class Complaints extends Activity {
     /**
      * EditText containing the "New To Do" text
      */
-   // private EditText mTextNewToDo;
+    // private EditText mTextNewToDo;
 
     /**
      * Progress spinner to use for table operations
@@ -84,10 +83,10 @@ public class Complaints extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.complaints);
 
-       // mProgressBar = (ProgressBar) findViewById(R.id.loadingProgressBar);
+        // mProgressBar = (ProgressBar) findViewById(R.id.loadingProgressBar);
 
         // Initialize the progress bar
-       // mProgressBar.setVisibility(ProgressBar.GONE);
+        // mProgressBar.setVisibility(ProgressBar.GONE);
 
         try {
             // Create the Mobile Service Client instance, using the provided
