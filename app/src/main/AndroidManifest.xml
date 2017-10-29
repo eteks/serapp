@@ -40,6 +40,11 @@
             <!--</intent-filter>-->
         <!--</receiver>-->
         <!-- For Push Notification -->
+        <service android:name="com.example.user.mahindra.MyInstanceIDService" android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID"/>
+            </intent-filter>
+        </service>
         <receiver android:name="com.microsoft.windowsazure.notifications.NotificationsBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
@@ -48,6 +53,9 @@
                 <category android:name="com.example.user.mahindra" />
             </intent-filter>
         </receiver>
+        <service
+            android:name="com.example.user.mahindra.RegistrationIntentService"
+            android:exported="false" />
     </application>
 
 

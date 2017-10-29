@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.EditText;
+import android.content.Context;
 
 
 import android.view.*;
@@ -79,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public static Boolean isVisible = false;
     private GoogleCloudMessaging gcm;
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    public static final String MyPREFERENCES = "MyPrefs" ;
 
     //private MobileServiceTable mTable;
 
@@ -236,9 +238,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                                             Toast.makeText(MainActivity.this, "Logging in!", Toast.LENGTH_SHORT).show();
 //                                            SharedPreferences prefs = getSharedPreferences("Username", MODE_PRIVATE);
 //                                            prefs.edit().putString("username", user.username).commit();
+                                            //To store the user data in session
+
+                                            SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                                            SharedPreferences.Editor editor = sharedpreferences.edit();
+                                            editor.putString("usertype", user.usertype);
+                                            editor.commit();
+                                            NotificationsManager.handleNotifications(MainActivity.this, SENDER_ID, MyHandler.class);
+                                            registerWithNotificationHubs();
+
                                             Intent intent = new Intent(MainActivity.this, ServiceDashBoard.class);
                                             intent.putExtra("username", user.username);
                                             startActivity(intent);
+
+
                                         } else {
                                             createAndShowDialog("Your password is wrong! Please check it and try again!!!", "Wrong");
                                             System.out.println("Failed");
@@ -265,8 +278,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         notification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NotificationsManager.handleNotifications(MainActivity.this, SENDER_ID, MyHandler.class);
-                registerWithNotificationHubs();
+//                NotificationsManager.handleNotifications(MainActivity.this, SENDER_ID, MyHandler.class);
+//                registerWithNotificationHubs();
 
 //                EditText notificationText = (EditText) findViewById(R.id.editTextNotificationMessage);
                 String notificationText = "Notification message";
@@ -288,10 +301,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                             try {
                                 // POST request
                                 urlConnection.setDoOutput(true);
+                                urlConnection.setDoOutput(true);
 
                                 // Authenticate the POST request with the SaS token
                                 urlConnection.setRequestProperty("Authorization",
                                         generateSasToken(url.toString()));
+
 
                                 // Notification format should be GCM
                                 urlConnection.setRequestProperty("ServiceBusNotification-Format", "gcm");
@@ -299,12 +314,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                                 // Include any tags
                                 // Example below targets 3 specific tags
                                 // Refer to : https://azure.microsoft.com/en-us/documentation/articles/notification-hubs-routing-tag-expressions/
-                                // urlConnection.setRequestProperty("ServiceBusNotification-Tags",
-                                //        "tag1 || tag2 || tag3");
+//                                 urlConnection.setRequestProperty("ServiceBusNotification-Tags",
+//                                        "tag1 || tag2 || tag3");
+
+                                urlConnection.setRequestProperty("ServiceBusNotification-Tags",
+                                        "Service Manager");
 
                                 // Send notification message
                                 urlConnection.setFixedLengthStreamingMode(json.length());
                                 OutputStream bodyStream = new BufferedOutputStream(urlConnection.getOutputStream());
+//                                System.out.println("bodystream");
+//                                System.out.println("bodystream"+bodyStream);
                                 bodyStream.write(json.getBytes());
                                 bodyStream.close();
 
@@ -339,8 +359,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void registerWithNotificationHubs()
     {
         Log.i(TAG, " Registering with Notification Hubs");
-
+//        Intent intent = new Intent(this, RegistrationIntentService.class);
+//        startService(intent);
         if (checkPlayServices()) {
+            System.out.println("checkPlayServices called");
             // Start IntentService to register this application with GCM.
             Intent intent = new Intent(this, RegistrationIntentService.class);
             startService(intent);
@@ -473,6 +495,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             // Construct authorization string
             token = "SharedAccessSignature sr=" + targetUri + "&sig="
                     + signature + "&se=" + expires + "&skn=" + HubSasKeyName;
+            System.out.println("token"+token);
         } catch (Exception e) {
             if (isVisible) {
 //                ToastNotify("Exception Generating SaS : " + e.getMessage().toString());

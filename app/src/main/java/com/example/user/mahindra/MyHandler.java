@@ -19,8 +19,9 @@ public class MyHandler extends NotificationsHandler {
     public static final int NOTIFICATION_ID = 1;
     @Override
     public void onRegistered(Context context,  final String gcmRegistrationId) {
-        System.out.println("GCMID");
-        System.out.println(gcmRegistrationId);
+//        System.out.println();
+        System.out.println("GCMID"+gcmRegistrationId);
+        System.out.println(context);
         super.onRegistered(context, gcmRegistrationId);
 //        MainActivity.mClient.getPush().register(gcmRegistrationId);
         new AsyncTask<Void, Void, Void>() {
@@ -46,7 +47,7 @@ public class MyHandler extends NotificationsHandler {
         System.out.println("Entered into received function");
 //        String msg = bundle.getString("message");
         String msg = "New service has been registered for this vehicle number";
-
+        System.out.println(bundle);
         PendingIntent contentIntent = PendingIntent.getActivity(context,
                 0, // requestCode
 //                new Intent(context, MainActivity.class),
@@ -64,6 +65,7 @@ public class MyHandler extends NotificationsHandler {
 
         NotificationManager notificationManager = (NotificationManager)
                 context.getSystemService(Context.NOTIFICATION_SERVICE);
+        System.out.println("notification_id"+notification);
         notificationManager.notify(NOTIFICATION_ID, notification);
     }
 }
