@@ -33,7 +33,7 @@ public class NewService extends AppCompatActivity {
     TextView customer_address;
     private MobileServiceTable mTable;
     private MobileServiceClient mClient;
-
+    int vehicle_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,15 +44,23 @@ public class NewService extends AppCompatActivity {
         newservices.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(NewService.this, Complaints.class);
-                startActivity(i);
+                Intent intent = new Intent(NewService.this, Complaints.class);
+                String username = getIntent().getStringExtra("username");
+                Bundle extras = new Bundle();
+                extras.putString("username", username);
+                extras.putString("vehicle_id",String.valueOf(vehicle_id));
+                intent.putExtras(extras);
+                System.out.println(vehicle_id);
+                startActivity(intent);
             }
         });
         ImageButton logout = (ImageButton) findViewById(R.id.logout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                Intent intent = new Intent(NewService.this,
+                        MainActivity.class);
+                startActivity(intent);
             }
         });
         TextView test = (TextView)findViewById(R.id.username1);
@@ -76,7 +84,7 @@ public class NewService extends AppCompatActivity {
         });
         b = (Button) findViewById(R.id.btn_search);
         b.setOnClickListener(new View.OnClickListener() {
-            int vehicle_id;
+
             @Override
             public void onClick(View v) {
                 etname = (EditText) findViewById(R.id.vehicleNo);

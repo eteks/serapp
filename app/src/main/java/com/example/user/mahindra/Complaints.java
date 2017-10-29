@@ -9,16 +9,21 @@ import java.util.concurrent.TimeUnit;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
@@ -66,6 +71,8 @@ public class Complaints extends Activity {
      */
     private ListAdapter mAdapter;
 
+    String vehicle_id;
+
     /**
      * EditText containing the "New To Do" text
      */
@@ -83,12 +90,24 @@ public class Complaints extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.complaints);
-
-
-        // mProgressBar = (ProgressBar) findViewById(R.id.loadingProgressBar);
-
-        // Initialize the progress bar
-        // mProgressBar.setVisibility(ProgressBar.GONE);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.custom_toolbar);
+        //setSupportActionBar(myToolbar);
+        ImageButton logout = (ImageButton) findViewById(R.id.logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Complaints.this,
+                        MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        TextView test = (TextView)findViewById(R.id.username1);
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        String username = extras.getString("username");
+        test.setText(username);
+        vehicle_id = extras.getString("vehicle_id");
+        System.out.println(vehicle_id);
 
         try {
             // Create the Mobile Service Client instance, using the provided
@@ -145,10 +164,10 @@ public class Complaints extends Activity {
             @Override
             public void onClick(View view) {
                         for (int index = 0; index < length; index++) {
-                            int vehicle_id = 13;
+                            int vehicle = Integer.parseInt(vehicle_id);
                             //final MobileServiceTable<vehicle_complaint> FaultTable = mClient.getTable("vehicle_complaint", vehicle_complaint.class);
                             final vehicle_complaint record = new vehicle_complaint();
-                            record.setVehicle(vehicle_id);
+                            record.setVehicle(vehicle);
                             record.setComplaint(checkBoxRecord[index]+1);
                             addItem(record);
                         }
@@ -168,6 +187,7 @@ public class Complaints extends Activity {
                                             @Override
                                             public void run() {
                                                 System.out.println("Record inserted");
+                                                Toast.makeText(Complaints.this, "Complaint Registered!", Toast.LENGTH_SHORT).show();
                                             }
                                         });
                 } catch (final Exception e) {
