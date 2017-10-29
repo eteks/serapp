@@ -16,7 +16,7 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
     <TextView
-        android:id="@+id/username"
+        android:id="@+id/username1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Vehicle Status"
@@ -36,7 +36,7 @@
         android:layout_marginTop="80dp"
         android:text="Vehicle No."
         android:textSize="16sp"
-        android:layout_below="@+id/username"
+        android:layout_below="@+id/username1"
         android:layout_alignParentStart="true"
         android:layout_marginStart="19dp" />
 
@@ -60,7 +60,7 @@
         android:textSize="16sp"
         android:layout_alignBaseline="@+id/textView3"
         android:layout_alignBottom="@+id/textView3"
-        android:layout_toEndOf="@+id/username"
+        android:layout_toEndOf="@+id/username1"
         android:layout_marginStart="16dp" />
 
 

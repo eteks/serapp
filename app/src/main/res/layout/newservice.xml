@@ -3,72 +3,101 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.example.user.mahindra.NewService">
-
+    android:background="@color/lightblue"
+    >
     <android.support.v7.widget.Toolbar
-        android:id="@+id/my_toolbar"
+        android:id="@+id/custom_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:background="@color/toolbar"
+        android:title="@string/title"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+    <ImageButton
+        android:id="@+id/logout"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="end"
+        android:adjustViewBounds="false"
+        android:onClick="loggingOut"
+        android:scaleType="fitCenter"
+        android:background="@color/colorlogout"
+        android:src="@drawable/logout" />
+
+        <TextView
+            android:id="@+id/username1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/textView8"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="11dp"
+            android:layout_marginLeft="175dp"
+            android:layout_marginTop="17dp"
+            android:gravity="right"
+
+            android:text="usedr"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </android.support.v7.widget.Toolbar>
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="149dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="93dp"
         android:text="New Service"
         android:textAlignment="center"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/vehicleNo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/textView2"
-        android:layout_marginStart="98dp"
         android:layout_marginTop="23dp"
+        android:layout_toEndOf="@+id/textView10"
         android:ems="10"
+        android:hint="Vehicle No."
         android:inputType="textNoSuggestions|textPersonName"
-        android:text="Vehicle No."
         android:textAlignment="center"
         android:textSize="14sp" />
 
     <Button
-        android:id="@+id/re_service"
+        android:id="@+id/btn_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/textView2"
-        android:layout_below="@+id/editText"
+        android:layout_below="@+id/vehicleNo"
         android:layout_marginTop="18dp"
-        android:text="Search" />
+        android:text="Search"
+        android:background="@drawable/rounded_edge"/>
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/display1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"
         android:text="Customer Details"
         android:textStyle="bold"
-        android:layout_below="@+id/re_service"
-        android:layout_toStartOf="@+id/re_service" />
+        android:layout_below="@+id/btn_search"
+        android:layout_toStartOf="@+id/btn_search" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/display1"
+        android:layout_below="@+id/display1"
         android:layout_marginTop="12dp"
-        android:text="Name"
-        android:layout_below="@+id/textView3"
-        android:layout_alignEnd="@+id/textView3" />
+        android:gravity="left"
+        android:text="Name" />
 
     <TextView
         android:id="@+id/textView5"
@@ -77,6 +106,7 @@
         android:layout_alignStart="@+id/textView4"
         android:layout_below="@+id/textView4"
         android:layout_marginTop="14dp"
+        android:gravity="left"
         android:text="Contact No." />
 
     <TextView
@@ -86,31 +116,34 @@
         android:layout_alignStart="@+id/textView5"
         android:layout_below="@+id/textView5"
         android:layout_marginTop="16dp"
+        android:gravity="left"
         android:text="Address" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/customer_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/textView5"
-        android:layout_toEndOf="@+id/re_service"
-        android:text="Customer" />
+        android:layout_toEndOf="@+id/btn_search"
+        />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/customer_contact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/textView5"
-        android:layout_alignStart="@+id/textView7"
-        android:text="9874563210" />
+        android:layout_alignStart="@+id/customer_name"
+        android:layout_toEndOf="@+id/btn_search"
+        />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/customer_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView8"
+        android:layout_alignStart="@+id/customer_contact"
         android:layout_alignTop="@+id/textView6"
-        android:text="Pondicherry" />
+        android:layout_toEndOf="@+id/btn_search"
+        />
 
     <TextView
         android:id="@+id/textView10"
@@ -120,16 +153,17 @@
         android:text="Vehicle Info"
         android:textStyle="bold"
         android:layout_below="@+id/textView6"
-        android:layout_alignStart="@+id/textView3" />
+        android:layout_alignStart="@+id/display1" />
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Vehicle No."
+        android:layout_alignStart="@+id/vehicleNo"
         android:layout_below="@+id/textView10"
-        android:layout_alignStart="@+id/editText" />
+        android:layout_marginTop="20dp"
+        android:gravity="left"
+        android:text="Vehicle No." />
 
     <TextView
         android:id="@+id/textView12"
@@ -138,6 +172,7 @@
         android:layout_alignStart="@+id/textView11"
         android:layout_below="@+id/textView11"
         android:layout_marginTop="20dp"
+        android:gravity="left"
         android:text="Engine No." />
 
     <TextView
@@ -147,41 +182,43 @@
         android:layout_alignStart="@+id/textView12"
         android:layout_below="@+id/textView12"
         android:layout_marginTop="16dp"
+        android:gravity="left"
         android:text="Color Code" />
 
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/display"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView9"
+        android:layout_alignStart="@+id/customer_address"
         android:layout_alignTop="@+id/textView11"
-        android:text="PY 01 CJ 3439" />
+        android:layout_toEndOf="@+id/btn_search"
+        />
 
     <TextView
-        android:id="@+id/textView15"
+        android:id="@+id/engine_no"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/textView13"
-        android:layout_alignStart="@+id/textView14"
-        android:text="BS98e16" />
+        android:layout_alignStart="@+id/display" />
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/color"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Blue"
-        android:textAlignment="textStart"
         android:layout_alignBaseline="@+id/textView13"
         android:layout_alignBottom="@+id/textView13"
-        android:layout_alignStart="@+id/textView15" />
+        android:layout_alignStart="@+id/engine_no"
+        android:textAlignment="textStart" />
 
     <Button
         android:id="@+id/next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView16"
-        android:layout_toEndOf="@+id/textView7"
-        android:text="Next" />
+        android:text="Next"
+        android:background="@drawable/rounded_edge"
+        android:layout_below="@+id/color"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="17dp" />
 
 </RelativeLayout>
 
