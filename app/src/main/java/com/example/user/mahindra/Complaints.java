@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -83,6 +84,7 @@ public class Complaints extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.complaints);
 
+
         // mProgressBar = (ProgressBar) findViewById(R.id.loadingProgressBar);
 
         // Initialize the progress bar
@@ -129,7 +131,54 @@ public class Complaints extends Activity {
         }
     }
 
+    final int checkBoxRecord[] = new int[10];
+    int length = 0;
+    public void insertItem(int item){
+        //System.out.println(item.getText());
+        System.out.println(item);
+        checkBoxRecord[length] = item;
+        length++;
+        Button submit = (Button) findViewById(R.id.re_service);
+        submit.setOnClickListener(new View.OnClickListener() {
+            int ONE_TIME = 0;
 
+            @Override
+            public void onClick(View view) {
+                        for (int index = 0; index < length; index++) {
+                            int vehicle_id = 13;
+                            //final MobileServiceTable<vehicle_complaint> FaultTable = mClient.getTable("vehicle_complaint", vehicle_complaint.class);
+                            final vehicle_complaint record = new vehicle_complaint();
+                            record.setVehicle(vehicle_id);
+                            record.setComplaint(checkBoxRecord[index]+1);
+                            addItem(record);
+                        }
+            }
+        });
+    }
+
+    public void addItem(final vehicle_complaint record){
+        final MobileServiceTable<vehicle_complaint> FaultTable = mClient.getTable("vehicle_complaint", vehicle_complaint.class);
+        AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+                    final vehicle_complaint entity = mClient.getTable("vehicle_complaint", vehicle_complaint.class).insert(record).get();
+                    System.out.println();
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                System.out.println("Record inserted");
+                                            }
+                                        });
+                } catch (final Exception e) {
+                    createAndShowDialogFromTask(e, "Error");
+                }
+                return null;
+            }
+        };
+
+        runAsyncTask(task);
+    }
 
     /**
      * Mark an item as completed in the Mobile Service Table

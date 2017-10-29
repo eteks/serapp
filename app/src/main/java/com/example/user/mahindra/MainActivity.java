@@ -211,9 +211,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                                         } else if (user.password.equals(Password)) {
                                             System.out.println("Success Login");
                                             Toast.makeText(MainActivity.this, "Logging in!", Toast.LENGTH_SHORT).show();
-//                                            SharedPreferences prefs = getSharedPreferences("Username", MODE_PRIVATE);
-//                                            prefs.edit().putString("username", user.username).commit();
-                                            Intent intent = new Intent(MainActivity.this, ServiceDashBoard.class);
+                                            Intent intent = new Intent(MainActivity.this, Complaints.class);
                                             intent.putExtra("username", user.username);
                                             startActivity(intent);
                                         } else {

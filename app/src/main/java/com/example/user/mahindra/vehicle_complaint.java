@@ -5,13 +5,13 @@ package com.example.user.mahindra;
  */
 
 public class vehicle_complaint {
-        @com.google.gson.annotations.SerializedName("complaint_name")
-        private String c_name;
-        @com.google.gson.annotations.SerializedName("complaint_id")
-        private String com_id;
 
         @com.google.gson.annotations.SerializedName("id")
         private String mId;
+        @com.google.gson.annotations.SerializedName("vehicle_id")
+        private int vehicle_id;
+        @com.google.gson.annotations.SerializedName("complaint_id")
+        private int complaint_id;
 
 
         public vehicle_complaint() {
@@ -20,29 +20,24 @@ public class vehicle_complaint {
 
         @Override
         public String toString() {
-            return getText();
+            return "success";
 
         }
 
-        public vehicle_complaint(String text, String id,String c_id) {
-            this.setText(text);
-            this.setText(c_id);
+        public vehicle_complaint(int vehicle_id, int complaint_id) {
+            this.setVehicle(vehicle_id);
+            this.setComplaint(complaint_id);
 //            this.setId(id);
         }
 
-        public String getText() {
-            return c_name;
-
-        }
-        public String getC_id()
-        {
-            return com_id;
+        public void setVehicle(int id){
+            vehicle_id = id;
         }
 
-        public final void setText(String text) {
-            c_name = text;
-            com_id=text;
+        public void setComplaint(int id){
+            complaint_id = id;
         }
+
 
         public String getId() {
             return mId;

@@ -33,6 +33,7 @@ import static com.example.user.mahindra.R.id.checkBox;
          */
         int mLayoutResourceId;
 
+
         public ListAdapter(Context context, int layoutResourceId) {
             super(context, layoutResourceId);
 
@@ -44,10 +45,9 @@ import static com.example.user.mahindra.R.id.checkBox;
          * Returns the view for a specific item on the list
          */
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             View row = convertView;
             final complaint currentItem = getItem(position);
-
             if (row == null) {
                 LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
                 row = inflater.inflate(mLayoutResourceId, parent, false);
@@ -56,12 +56,26 @@ import static com.example.user.mahindra.R.id.checkBox;
             row.setTag(currentItem);
             //final CheckBox checkBox = (CheckBox) row.findViewById(R.id.checkToDoItem);
             //final ListView listViews = (ListView) row.findViewById(R.id.)
-            final TextView textView18 =(TextView)row.findViewById(R.id.textView18);
-            final TextView textView19 =(TextView)row.findViewById(R.id.textView19);
-            textView18.setText(currentItem.getC_id());
-            textView19.setText(currentItem.getText());
+            final CheckBox checkBox = (CheckBox) row.findViewById(R.id.checkBox);
+            checkBox.setText(currentItem.getText());
+            checkBox.setChecked(false);
+            checkBox.setEnabled(true);
+            final int index = 0;
+            checkBox.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View arg0) {
+                    if (checkBox.isChecked()) {
+                        if (mContext instanceof Complaints) {
+                            Complaints activity = (Complaints) mContext;
+                            activity.insertItem(position);
+                        }
+                    }
+                }
+            });
             return row;
         }
+
 
 
     }
