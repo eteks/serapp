@@ -45,8 +45,12 @@ public class MyHandler extends NotificationsHandler {
     @Override
     public void onReceive(Context context, Bundle bundle) {
         System.out.println("Entered into received function");
-//        String msg = bundle.getString("message");
-        String msg = "New service has been registered for this vehicle number";
+        String msg = bundle.getString("message");
+//        final String vehicle_no = bundle.getString("vehicle_no");
+//        System.out.println("vehicle detail in notification page"+vehicle_no);
+//        String msg = "New service has been registered for this vehicle number "+vehicle_no;
+//        String msg = "New service has been registered for this vehicle number";
+
         System.out.println(bundle);
         PendingIntent contentIntent = PendingIntent.getActivity(context,
                 0, // requestCode
@@ -59,7 +63,7 @@ public class MyHandler extends NotificationsHandler {
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle("Vehicle Service Registration Status")
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
-                .setContentText(msg)
+                .setContentText(msg.toString())
                 .setContentIntent(contentIntent)
                 .build();
 

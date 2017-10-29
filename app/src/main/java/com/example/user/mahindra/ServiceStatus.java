@@ -16,7 +16,7 @@ public class ServiceStatus extends AppCompatActivity {
         setContentView(R.layout.services_status);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-        Button newservices = (Button) findViewById(R.id.re_service);
+        Button newservices = (Button) findViewById(R.id.username);
         newservices.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view)

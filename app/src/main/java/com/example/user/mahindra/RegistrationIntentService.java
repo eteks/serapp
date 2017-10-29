@@ -37,7 +37,7 @@ public class RegistrationIntentService extends IntentService {
             InstanceID instanceID = InstanceID.getInstance(this);
             String token = instanceID.getToken(NotificationSetting.SenderId,
                     GoogleCloudMessaging.INSTANCE_ID_SCOPE);
-            Log.i(TAG, "Got GCM Registration Token: " + token);
+//            Log.i(TAG, "Got GCM Registration Token: " + token);
             System.out.println("got gcm token");
             // Storing the registration id that indicates whether the generated token has been
             // sent to your server. If it is not stored, send the token to your server,
@@ -46,7 +46,7 @@ public class RegistrationIntentService extends IntentService {
 //                    NotificationSetting.HubListenConnectionString, this);
 //            System.out.println("unregister process");
 //            hub.unregister();
-            if ((regID=sharedPreferences.getString("registrationID", null)) == null) {
+//            if ((regID=sharedPreferences.getString("registrationID", null)) == null) {
                 NotificationHub hub = new NotificationHub(NotificationSetting.HubName,
                         NotificationSetting.HubListenConnectionString, this);
                 Log.i(TAG, "Attempting to register with NH using token : " + token);
@@ -55,10 +55,11 @@ public class RegistrationIntentService extends IntentService {
 
                 //get data from session
                 SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-                String usertype_data = sharedpreferences.getString("usertype",null);
+                String usertype_data = sharedpreferences.getString("usertype",null).toLowerCase().replaceAll("\\s","");
                 System.out.println("usertype_data"+usertype_data);
-
+                System.out.println("gcm registration start");
                 regID = hub.register(token,usertype_data).getRegistrationId();
+//                regID = hub.register(token).getRegistrationId();
 
                 // If you want to use tags...
                 // Refer to : https://azure.microsoft.com/en-us/documentation/articles/notification-hubs-routing-tag-expressions/
@@ -67,9 +68,9 @@ public class RegistrationIntentService extends IntentService {
                 resultString = "Registered Successfully - RegId : " + regID;
                 Log.i(TAG, resultString);
                 sharedPreferences.edit().putString("registrationID", regID ).apply();
-            } else {
-                resultString = "Previously Registered Successfully - RegId : " + regID;
-            }
+//            } else {
+//                resultString = "Previously Registered Successfully - RegId : " + regID;
+//            }
         } catch (Exception e) {
             Log.e(TAG, resultString="Failed to complete token refresh", e);
             // If an exception happens while fetching the new token or updating our registration data
