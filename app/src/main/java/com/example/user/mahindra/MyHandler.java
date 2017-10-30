@@ -19,8 +19,9 @@ public class MyHandler extends NotificationsHandler {
     public static final int NOTIFICATION_ID = 1;
     @Override
     public void onRegistered(Context context,  final String gcmRegistrationId) {
-        System.out.println("GCMID");
-        System.out.println(gcmRegistrationId);
+//        System.out.println();
+        System.out.println("GCMID"+gcmRegistrationId);
+        System.out.println(context);
         super.onRegistered(context, gcmRegistrationId);
 //        MainActivity.mClient.getPush().register(gcmRegistrationId);
         new AsyncTask<Void, Void, Void>() {
@@ -44,9 +45,13 @@ public class MyHandler extends NotificationsHandler {
     @Override
     public void onReceive(Context context, Bundle bundle) {
         System.out.println("Entered into received function");
-//        String msg = bundle.getString("message");
-        String msg = "New service has been registered for this vehicle number";
+        String msg = bundle.getString("message");
+//        final String vehicle_no = bundle.getString("vehicle_no");
+//        System.out.println("vehicle detail in notification page"+vehicle_no);
+//        String msg = "New service has been registered for this vehicle number "+vehicle_no;
+//        String msg = "New service has been registered for this vehicle number";
 
+        System.out.println(bundle);
         PendingIntent contentIntent = PendingIntent.getActivity(context,
                 0, // requestCode
 //                new Intent(context, MainActivity.class),
@@ -58,12 +63,13 @@ public class MyHandler extends NotificationsHandler {
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle("Vehicle Service Registration Status")
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
-                .setContentText(msg)
+                .setContentText(msg.toString())
                 .setContentIntent(contentIntent)
                 .build();
 
         NotificationManager notificationManager = (NotificationManager)
                 context.getSystemService(Context.NOTIFICATION_SERVICE);
+        System.out.println("notification_id"+notification);
         notificationManager.notify(NOTIFICATION_ID, notification);
     }
 }

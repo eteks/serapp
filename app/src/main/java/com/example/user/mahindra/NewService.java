@@ -49,6 +49,7 @@ public class NewService extends AppCompatActivity {
                 Bundle extras = new Bundle();
                 extras.putString("username", username);
                 extras.putString("vehicle_id",String.valueOf(vehicle_id));
+                extras.putString("vehicle_no",String.valueOf(etname.getText().toString().toUpperCase()));
                 intent.putExtras(extras);
                 System.out.println(vehicle_id);
                 startActivity(intent);

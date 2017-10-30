@@ -3,6 +3,7 @@
     <string-array name="user_type">
         <item>Service Agent</item>
         <item>Quality Agent</item>
+        <item>Service Manager</item>
 
     </string-array>
 </resources>
