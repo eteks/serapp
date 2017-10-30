@@ -155,22 +155,20 @@ public class Complaints extends Activity {
     public void insertItem(int item){
         //System.out.println(item.getText());
         System.out.println(item);
-        checkBoxRecord[length] = item;
-        length++;
+        //checkBoxRecord[length] = item;
+        //length++;
+        final vehicle_complaint record = new vehicle_complaint();
+        int vehicle = Integer.parseInt(vehicle_id);
+        record.setVehicle(vehicle);
+        record.setComplaint(item+1);
+        addItem(record);
         Button submit = (Button) findViewById(R.id.re_service);
         submit.setOnClickListener(new View.OnClickListener() {
             int ONE_TIME = 0;
 
             @Override
             public void onClick(View view) {
-                        for (int index = 0; index < length; index++) {
-                            int vehicle = Integer.parseInt(vehicle_id);
-                            //final MobileServiceTable<vehicle_complaint> FaultTable = mClient.getTable("vehicle_complaint", vehicle_complaint.class);
-                            final vehicle_complaint record = new vehicle_complaint();
-                            record.setVehicle(vehicle);
-                            record.setComplaint(checkBoxRecord[index]+1);
-                            addItem(record);
-                        }
+                Toast.makeText(Complaints.this, "Complaint Registered!", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -187,7 +185,6 @@ public class Complaints extends Activity {
                                             @Override
                                             public void run() {
                                                 System.out.println("Record inserted");
-                                                Toast.makeText(Complaints.this, "Complaint Registered!", Toast.LENGTH_SHORT).show();
                                             }
                                         });
                 } catch (final Exception e) {
