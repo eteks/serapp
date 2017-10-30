@@ -173,29 +173,24 @@ public class Complaints extends Activity {
         }
     }
 
-    final int checkBoxRecord[] = new int[10];
     int length = 0;
     public void insertItem(int item){
         //System.out.println(item.getText());
-        System.out.println("item"+item);
-        checkBoxRecord[length] = item;
-        length++;
+        //System.out.println(item);
+        //checkBoxRecord[length] = item;
+        //length++;
+        final vehicle_complaint record = new vehicle_complaint();
+        int vehicle = Integer.parseInt(vehicle_id);
+        record.setVehicle(vehicle);
+        record.setComplaint(item+1);
+        addItem(record);
+        //sSystem.out.println("item"+item);
         Button submit = (Button) findViewById(R.id.re_service);
         submit.setOnClickListener(new View.OnClickListener() {
-            int ONE_TIME = 0;
 
             @Override
             public void onClick(View view) {
-                        System.out.println("Service button clicked");
-                        for (int index = 0; index < length; index++) {
-                            int vehicle = Integer.parseInt(vehicle_id);
-                            System.out.println("vehicle_id"+vehicle_id);
-                            //final MobileServiceTable<vehicle_complaint> FaultTable = mClient.getTable("vehicle_complaint", vehicle_complaint.class);
-                            final vehicle_complaint record = new vehicle_complaint();
-                            record.setVehicle(vehicle);
-                            record.setComplaint(checkBoxRecord[index]+1);
-                            addItem(record);
-                        }
+                    Toast.makeText(Complaints.this, "Complaint Registered!", Toast.LENGTH_SHORT).show();
                     //Code To send Notification
                     String vehicle_det = vehicle_no;
                     System.out.println("vehicle detail in complaint page"+vehicle_det);
@@ -293,7 +288,6 @@ public class Complaints extends Activity {
                                             @Override
                                             public void run() {
                                                 System.out.println("Record inserted");
-                                                Toast.makeText(Complaints.this, "Complaint Registered!", Toast.LENGTH_SHORT).show();
                                             }
                                         });
                 } catch (final Exception e) {
