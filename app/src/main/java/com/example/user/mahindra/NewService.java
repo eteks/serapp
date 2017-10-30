@@ -19,6 +19,7 @@ import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 import com.squareup.okhttp.OkHttpClient;
 import java.net.MalformedURLException;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 
@@ -89,80 +90,96 @@ public class NewService extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 etname = (EditText) findViewById(R.id.vehicleNo);
+                vehicle_reg_no = (TextView) findViewById(R.id.display);
+                vehicle_engine_no = (TextView) findViewById(R.id.engine_no);
+                vehicle_colour_code = (TextView) findViewById(R.id.color);
+                customer_name = (TextView) findViewById(R.id.customer_name);
+                customer_mobile = (TextView) findViewById(R.id.customer_contact);
+                customer_address = (TextView) findViewById(R.id.customer_address);
                 final String vehicle_no = etname.getText().toString();
                 final MobileServiceTable<vehicle> VehicleTable = mClient.getTable("vehicle", vehicle.class);
-                AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
-                    @Override
-                    protected Void doInBackground(Void... params) {
-                        try {
-                            List<vehicle> vehicleData = VehicleTable
-                                    .where()
-                                    .field("vehicle_reg_no").eq(vehicle_no)
-                                    .execute()
-                                    .get();
-                            StringBuilder commaSepValueBuilder = new StringBuilder();
-                            //Looping through the list
-                            for (int i = 0; i < vehicleData.size(); i++) {
-                                commaSepValueBuilder.append(vehicleData.get(i));
+                if(vehicle_no.equals("")){
+                    createAndShowDialog("Please enter your Vehicle Number", "Invalid Number");
+                }else {
+                    AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+                        @Override
+                        protected Void doInBackground(Void... params) {
+                            try {
+                                List<vehicle> vehicleData = VehicleTable
+                                        .where()
+                                        .field("vehicle_reg_no").eq(vehicle_no)
+                                        .execute()
+                                        .get();
+                                StringBuilder commaSepValueBuilder = new StringBuilder();
+                                //Looping through the list
+                                for (int i = 0; i < vehicleData.size(); i++) {
+                                    commaSepValueBuilder.append(vehicleData.get(i));
 
-                                if (i != vehicleData.size() - 1) {
-                                    commaSepValueBuilder.append(", ");
+                                    if (i != vehicleData.size() - 1) {
+                                        commaSepValueBuilder.append(", ");
+                                    }
                                 }
+                                final String Details = commaSepValueBuilder.toString();
+                                //System.out.println(Details);
+                                final String[] temp = Details.split(",");
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (Details.equals("")) {
+                                            createAndShowDialog("Please check your Vehicle Number", "Invalid Number");
+                                        }else{
+                                            vehicle_id = Integer.parseInt(temp[0]);
+                                            final MobileServiceTable<customer> CustomerTable = mClient.getTable("customer", customer.class);
+                                            List<customer> result = null;
+                                            try {
+                                                result = CustomerTable
+                                                        .where()
+                                                        .field("vehicle_id").eq(vehicle_id)
+                                                        .execute()
+                                                        .get();
+                                            } catch (InterruptedException e) {
+                                                e.printStackTrace();
+                                            } catch (ExecutionException e) {
+                                                e.printStackTrace();
+                                            }
+                                            //Looping through the list
+                                            StringBuilder CustomerValues = new StringBuilder();
+                                            for (int i = 0; i < result.size(); i++) {
+                                                System.out.println(result);
+                                                CustomerValues.append(result.get(i));
+                                                if (i != result.size() - 1) {
+                                                    CustomerValues.append(",");
+                                                }
+                                            }
+                                            String CustomerSeparatedValues = CustomerValues.toString();
+                                            System.out.println(CustomerSeparatedValues);
+                                            final String[] temp1 = CustomerSeparatedValues.split("\\*");
+                                            System.out.println(temp1[0]);
+                                            System.out.println(temp1[1]);
+                                            System.out.println(temp1[2]);
+                                            runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    vehicle_reg_no.setText(etname.getText().toString().toUpperCase());
+                                                    vehicle_engine_no.setText(temp[1]);
+                                                    vehicle_colour_code.setText(temp[2]);
+                                                    customer_name.setText(temp1[0]);
+                                                    customer_mobile.setText(temp1[1]);
+                                                    customer_address.setText(temp1[2]);
+                                                }
+                                            });
+                                        }
+                                    }
+                                });
+                            } catch (final Exception e) {
+                                createAndShowDialogFromTask(e, "Error");
                             }
-                            String Password = commaSepValueBuilder.toString();
-                            System.out.println(Password);
-                            final String[] temp = Password.split(",");
-                            vehicle_id = Integer.parseInt(temp[0]);
-                            System.out.println(temp[0]);
-                            System.out.println(temp[1]);
-                            vehicle_reg_no = (TextView) findViewById(R.id.display);
-                            vehicle_engine_no = (TextView) findViewById(R.id.engine_no);
-                            vehicle_colour_code = (TextView) findViewById(R.id.color);
-                            customer_name = (TextView) findViewById(R.id.customer_name);
-                            customer_mobile = (TextView) findViewById(R.id.customer_contact);
-                            customer_address = (TextView) findViewById(R.id.customer_address);
-                            final MobileServiceTable<customer> CustomerTable = mClient.getTable("customer", customer.class);
-                            List<customer> result = CustomerTable
-                                    .where()
-                                    .field("vehicle_id").eq(vehicle_id)
-                                    .execute()
-                                    .get();
-                            //Looping through the list
-                            StringBuilder CustomerValues = new StringBuilder();
-                            for (int i = 0; i < result.size(); i++) {
-                                System.out.println(result);
-                                CustomerValues.append(result.get(i));
-                                if (i != result.size() - 1) {
-                                    CustomerValues.append(",");
-                                }
-                            }
-                            String CustomerSeparatedValues = CustomerValues.toString();
-                            System.out.println(CustomerSeparatedValues);
-                            final String[] temp1 = CustomerSeparatedValues.split("\\*");
-                            System.out.println(temp1[0]);
-                            System.out.println(temp1[1]);
-                            System.out.println(temp1[2]);
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    vehicle_reg_no.setText(etname.getText().toString().toUpperCase());
-                                    vehicle_engine_no.setText(temp[1]);
-                                    vehicle_colour_code.setText(temp[2]);
-                                    customer_name.setText(temp1[0]);
-                                    customer_mobile.setText(temp1[1]);
-                                    customer_address.setText(temp1[2]);
-                                }
-                            });
-                        } catch (final Exception e) {
-                            createAndShowDialogFromTask(e, "Error");
+                            return null;
                         }
+                    };
 
-
-                        return null;
-                    }
-                };
-
-                runAsyncTask(task);
+                    runAsyncTask(task);
+                }
             }
 
             ;
