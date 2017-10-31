@@ -149,7 +149,6 @@ public class NewService extends AppCompatActivity {
                                 final String Details = commaSepValueBuilder.toString();
                                 System.out.println(Details);
                                 final String[] temp = Details.split(",");
-
                                         if (Details.equals("")) {
                                             runOnUiThread(new Runnable() {
                                                 @Override
@@ -201,7 +200,7 @@ public class NewService extends AppCompatActivity {
                                         }
 
                             } catch (final Exception e) {
-                                createAndShowDialogFromTask(e, "Error");
+                                createAndShowDialog(e, "Error");
                             }
                             return null;
                         }

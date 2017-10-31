@@ -67,7 +67,7 @@ public class vehicle {
     public String getReg_no()
     {
 
-        return v_id+","+e_no+","+col_code ;
+        return v_id+","+e_no+","+col_code+","+reg_no;
     }
     public String getCol_code()
     {

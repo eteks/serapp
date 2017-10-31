@@ -19,6 +19,8 @@ import static com.example.user.mahindra.R.id.notification;
 
 
 public class MyHandler extends NotificationsHandler {
+    public static manager manager;
+    public static Complaints complaint;
     public static final int NOTIFICATION_ID = 1;
     @Override
     public void onRegistered(Context context,  final String gcmRegistrationId) {
@@ -50,19 +52,37 @@ public class MyHandler extends NotificationsHandler {
     public void onReceive(Context context, Bundle bundle) {
         System.out.println("Entered into received function");
 //        String msg = bundle.getString("message");
-        final String vehicle_no = bundle.getString("vehicle_no");
-        System.out.println("vehicle detail in notification page"+vehicle_no);
+//        final String vehicle_no = bundle.getString("vehicle_no");
+//        System.out.println("vehicle detail in notification page"+vehicle_no);
+        String vehicle_no = Complaints.vehicle_no;
         String msg = "New service has been registered for this vehicle number "+vehicle_no;
  //       String msg = "New service has been registered for this vehicle number";
+        String vehicle = Complaints.vehicle_id;
+        System.out.println("vehicle ID:"+vehicle);
+        Intent intent = new Intent(context, manager.class);
+        intent.putExtra("vehicle",vehicle);
+//        Intent intent = new Intent(context,manager.class);
+//        Bundle extras = new Bundle();
+//        extras.putString("vehicle_id",vehicle_id);
+//        System.out.println(bundle);
 
-        System.out.println(bundle);
-        PendingIntent contentIntent = PendingIntent.getActivity(context,
-                0, // requestCode
-//                new Intent(context, MainActivity.class),
-                new Intent("tywele.remindme.ACTION_EVENT_TIME"),
-                0); // flags
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+// Adds the back stack
+        stackBuilder.addParentStack(manager.class);
+// Adds the Intent to the top of the stack
+        stackBuilder.addNextIntent(intent);
+// Gets a PendingIntent containing the entire back stack
+        PendingIntent resultPendingIntent =
+                stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
 
+
+
+//        PendingIntent contentIntent = PendingIntent.getActivity(context,
+//                0, // requestCode
+////                new Intent(context, MainActivity.class),
+//                intent,
+//                0); // flags
 
         Notification notification = new NotificationCompat.Builder(context)
 //                .setSmallIcon(R.drawable.ic_launcher)
@@ -70,7 +90,7 @@ public class MyHandler extends NotificationsHandler {
                 .setContentTitle("Vehicle Service Registration Status")
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
                 .setContentText(msg.toString())
-                .setContentIntent(contentIntent)
+                .setContentIntent(resultPendingIntent)
                 .build();
 
         NotificationManager notificationManager = (NotificationManager)
@@ -78,30 +98,7 @@ public class MyHandler extends NotificationsHandler {
         System.out.println("notification_id"+notification);
         notificationManager.notify(NOTIFICATION_ID, notification);
 
-//        int id = 1;
-//        Intent resultIntent = new Intent(this, NewService.class);
-//        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-//// Adds the back stack
-//        stackBuilder.addParentStack(NewService.class);
-//// Adds the Intent to the top of the stack
-//        stackBuilder.addNextIntent(resultIntent);
-//// Gets a PendingIntent containing the entire back stack
-//        PendingIntent resultPendingIntent =
-//                stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-//        Notification notification = new NotificationCompat.Builder(context)
-////                .setSmallIcon(R.drawable.ic_launcher)
-//                .setSmallIcon(R.mipmap.ic_launcher)
-//                .setContentTitle("Vehicle Service Registration Status")
-//                .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
-//                .setContentText(msg.toString())
-//                .setContentIntent(resultPendingIntent)
-//                .build();
-//        NotificationManager mnotificationManager = (NotificationManager)
-//                context.getSystemService(Context.NOTIFICATION_SERVICE);
-//        mnotificationManager.notify(id, notification);
-
-
-
     }
+
 }
 
