@@ -8,11 +8,14 @@ import com.microsoft.windowsazure.notifications.NotificationsHandler;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
+
+import static com.example.user.mahindra.R.id.notification;
 
 
 public class MyHandler extends NotificationsHandler {
@@ -40,16 +43,17 @@ public class MyHandler extends NotificationsHandler {
                 return null;
             }
         }.execute();
+
     }
 
     @Override
     public void onReceive(Context context, Bundle bundle) {
         System.out.println("Entered into received function");
-        String msg = bundle.getString("message");
-//        final String vehicle_no = bundle.getString("vehicle_no");
-//        System.out.println("vehicle detail in notification page"+vehicle_no);
-//        String msg = "New service has been registered for this vehicle number "+vehicle_no;
-//        String msg = "New service has been registered for this vehicle number";
+//        String msg = bundle.getString("message");
+        final String vehicle_no = bundle.getString("vehicle_no");
+        System.out.println("vehicle detail in notification page"+vehicle_no);
+        String msg = "New service has been registered for this vehicle number "+vehicle_no;
+ //       String msg = "New service has been registered for this vehicle number";
 
         System.out.println(bundle);
         PendingIntent contentIntent = PendingIntent.getActivity(context,
@@ -57,6 +61,8 @@ public class MyHandler extends NotificationsHandler {
 //                new Intent(context, MainActivity.class),
                 new Intent("tywele.remindme.ACTION_EVENT_TIME"),
                 0); // flags
+
+
 
         Notification notification = new NotificationCompat.Builder(context)
 //                .setSmallIcon(R.drawable.ic_launcher)
@@ -71,5 +77,31 @@ public class MyHandler extends NotificationsHandler {
                 context.getSystemService(Context.NOTIFICATION_SERVICE);
         System.out.println("notification_id"+notification);
         notificationManager.notify(NOTIFICATION_ID, notification);
+
+//        int id = 1;
+//        Intent resultIntent = new Intent(this, NewService.class);
+//        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+//// Adds the back stack
+//        stackBuilder.addParentStack(NewService.class);
+//// Adds the Intent to the top of the stack
+//        stackBuilder.addNextIntent(resultIntent);
+//// Gets a PendingIntent containing the entire back stack
+//        PendingIntent resultPendingIntent =
+//                stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+//        Notification notification = new NotificationCompat.Builder(context)
+////                .setSmallIcon(R.drawable.ic_launcher)
+//                .setSmallIcon(R.mipmap.ic_launcher)
+//                .setContentTitle("Vehicle Service Registration Status")
+//                .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
+//                .setContentText(msg.toString())
+//                .setContentIntent(resultPendingIntent)
+//                .build();
+//        NotificationManager mnotificationManager = (NotificationManager)
+//                context.getSystemService(Context.NOTIFICATION_SERVICE);
+//        mnotificationManager.notify(id, notification);
+
+
+
     }
 }
+

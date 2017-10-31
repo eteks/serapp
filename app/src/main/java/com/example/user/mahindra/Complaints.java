@@ -16,7 +16,9 @@ import java.util.concurrent.TimeUnit;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -58,6 +60,7 @@ import com.squareup.okhttp.OkHttpClient;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
+import static com.example.user.mahindra.MainActivity.MyPREFERENCES;
 import static com.microsoft.windowsazure.mobileservices.table.query.QueryOperations.*;
 
 public class Complaints extends Activity {
@@ -102,7 +105,7 @@ public class Complaints extends Activity {
     /**
      * Progress spinner to use for table operations
      */
-    //private ProgressBar mProgressBar;
+    private ProgressBar mProgressBar;
 
     /**
      * Initializes the activity
@@ -117,8 +120,10 @@ public class Complaints extends Activity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Complaints.this,
-                        MainActivity.class);
+                Intent intent = new Intent(Complaints.this, MainActivity.class);
+                SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                sharedpreferences.edit().remove("usertype").commit();
+                finish();
                 startActivity(intent);
             }
         });
@@ -173,18 +178,13 @@ public class Complaints extends Activity {
         }
     }
 
-    int length = 0;
     public void insertItem(int item){
-        //System.out.println(item.getText());
-        //System.out.println(item);
-        //checkBoxRecord[length] = item;
-        //length++;
         final vehicle_complaint record = new vehicle_complaint();
         int vehicle = Integer.parseInt(vehicle_id);
         record.setVehicle(vehicle);
         record.setComplaint(item+1);
         addItem(record);
-        //sSystem.out.println("item"+item);
+        //System.out.println("item"+item);
         Button submit = (Button) findViewById(R.id.re_service);
         submit.setOnClickListener(new View.OnClickListener() {
 
@@ -261,7 +261,13 @@ public class Complaints extends Activity {
     //                                    Toast.makeText(Complaints.this, "Notification sent to service manager", Toast.LENGTH_LONG).show();
     //                                    ToastNotify(builder.toString())
                                     }
-                                    Toast.makeText(Complaints.this, "Service Registered. Notification sent to service manager", Toast.LENGTH_LONG).show();
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(Complaints.this, "Notification sent to service manager", Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+
                                 } finally {
                                     urlConnection.disconnect();
                                 }
@@ -274,6 +280,50 @@ public class Complaints extends Activity {
                     }.start();
             }
         });
+    }
+
+    public void deleteItem(int item) {
+        int vehicle = Integer.parseInt(vehicle_id);
+        item++;
+        deleteRecord(vehicle,item);
+    }
+
+
+    public void deleteRecord(final int vehicle_id, final int complaint_id){
+        final MobileServiceTable<vehicle_complaint> FaultTable = mClient.getTable("vehicle_complaint", vehicle_complaint.class);
+        AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+                    final List<vehicle_complaint> result = mClient.getTable("vehicle_complaint", vehicle_complaint.class).where().field("vehicle_id").eq(val(vehicle_id)).and().field("complaint_id").eq(val(complaint_id)).select("id").execute().get();
+                    System.out.println("vehicle_id:"+result);
+                    StringBuilder commaSepValueBuilder = new StringBuilder();
+                    //Looping through the list
+                    for (int i = 0; i < result.size(); i++) {
+                        commaSepValueBuilder.append(result.get(i));
+
+                        if (i != result.size() - 1) {
+                            commaSepValueBuilder.append(", ");
+                        }
+                    }
+
+                    final String id = commaSepValueBuilder.toString();
+                    System.out.println("vehicle_id:"+id);
+                    mClient.getTable("vehicle_complaint", vehicle_complaint.class).delete(id);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            System.out.println("Record deleted");
+                        }
+                    });
+                } catch (final Exception e) {
+                    createAndShowDialogFromTask(e, "Error");
+                }
+                return null;
+            }
+        };
+
+        runAsyncTask(task);
     }
 
     public void addItem(final vehicle_complaint record){
@@ -496,45 +546,45 @@ public class Complaints extends Activity {
         return token;
     }
 
-//    private class ProgressFilter implements ServiceFilter {
-//
-//        @Override
-//        public ListenableFuture<ServiceFilterResponse> handleRequest(ServiceFilterRequest request, NextServiceFilterCallback nextServiceFilterCallback) {
-//
-//            final SettableFuture<ServiceFilterResponse> resultFuture = SettableFuture.create();
-//
-//
-//            runOnUiThread(new Runnable() {
-//
-//                @Override
-//                public void run() {
-//                    if (mProgressBar != null) mProgressBar.setVisibility(ProgressBar.VISIBLE);
-//                }
-//            });
-//
-//            ListenableFuture<ServiceFilterResponse> future = nextServiceFilterCallback.onNext(request);
-//
-//            Futures.addCallback(future, new FutureCallback<ServiceFilterResponse>() {
-//                @Override
-//                public void onFailure(Throwable e) {
-//                    resultFuture.setException(e);
-//                }
-//
-//                @Override
-//                public void onSuccess(ServiceFilterResponse response) {
-//                    runOnUiThread(new Runnable() {
-//
-//                        @Override
-//                        public void run() {
-//                            if (mProgressBar != null) mProgressBar.setVisibility(ProgressBar.GONE);
-//                        }
-//                    });
-//
-//                    resultFuture.set(response);
-//                }
-//            });
-//
-//            return resultFuture;
-//        }
-//    }
+    private class ProgressFilter implements ServiceFilter {
+
+        @Override
+        public ListenableFuture<ServiceFilterResponse> handleRequest(ServiceFilterRequest request, NextServiceFilterCallback nextServiceFilterCallback) {
+
+            final SettableFuture<ServiceFilterResponse> resultFuture = SettableFuture.create();
+
+
+            runOnUiThread(new Runnable() {
+
+                @Override
+                public void run() {
+                    if (mProgressBar != null) mProgressBar.setVisibility(ProgressBar.VISIBLE);
+                }
+            });
+
+            ListenableFuture<ServiceFilterResponse> future = nextServiceFilterCallback.onNext(request);
+
+            Futures.addCallback(future, new FutureCallback<ServiceFilterResponse>() {
+                @Override
+                public void onFailure(Throwable e) {
+                    resultFuture.setException(e);
+                }
+
+                @Override
+                public void onSuccess(ServiceFilterResponse response) {
+                    runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            if (mProgressBar != null) mProgressBar.setVisibility(ProgressBar.GONE);
+                        }
+                    });
+
+                    resultFuture.set(response);
+                }
+            });
+
+            return resultFuture;
+        }
+    }
 }

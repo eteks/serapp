@@ -229,9 +229,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
                                             Intent intent = new Intent(MainActivity.this, NewService.class);
                                             intent.putExtra("username", user.username);
+                                            finish();
                                             startActivity(intent);
-
-
                                         } else {
                                             createAndShowDialog("Your password is wrong! Please check it and try again!!!", "Wrong");
                                             System.out.println("Failed");

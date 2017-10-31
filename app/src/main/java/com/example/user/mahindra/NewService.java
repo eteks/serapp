@@ -1,11 +1,17 @@
 package com.example.user.mahindra;
 
 import android.app.AlertDialog;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
@@ -21,6 +27,8 @@ import java.net.MalformedURLException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+
+import static com.example.user.mahindra.MainActivity.MyPREFERENCES;
 
 
 public class NewService extends AppCompatActivity {
@@ -53,15 +61,19 @@ public class NewService extends AppCompatActivity {
                 extras.putString("vehicle_no",String.valueOf(etname.getText().toString().toUpperCase()));
                 intent.putExtras(extras);
                 System.out.println(vehicle_id);
+                finish();
                 startActivity(intent);
+
             }
         });
         ImageButton logout = (ImageButton) findViewById(R.id.logout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(NewService.this,
-                        MainActivity.class);
+                Intent intent = new Intent(NewService.this, MainActivity.class);
+                SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                sharedpreferences.edit().remove("usertype").commit();
+                finish();
                 startActivity(intent);
             }
         });

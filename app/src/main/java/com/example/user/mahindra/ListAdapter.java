@@ -71,6 +71,12 @@ import static com.example.user.mahindra.R.id.checkBox;
                             activity.insertItem(position);
                         }
                     }
+                    if(!checkBox.isChecked()){
+                        if (mContext instanceof Complaints) {
+                            Complaints activity = (Complaints) mContext;
+                            activity.deleteItem(position);
+                        }
+                    }
                 }
             });
             return row;
