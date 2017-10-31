@@ -42,12 +42,8 @@ public class vehicle {
     public vehicle() {
 
     }
-    static int count = 0;
     @Override
     public String toString() {
-        System.out.println("Returning Engine");
-        count++;
-        System.out.println(count);
         return getReg_no();
     }
 

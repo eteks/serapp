@@ -132,13 +132,16 @@ public class NewService extends AppCompatActivity {
                                     }
                                 }
                                 final String Details = commaSepValueBuilder.toString();
-                                //System.out.println(Details);
+                                System.out.println(Details);
                                 final String[] temp = Details.split(",");
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
+
                                         if (Details.equals("")) {
-                                            createAndShowDialog("Please check your Vehicle Number", "Invalid Number");
+                                            runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    createAndShowDialog("Please check your Vehicle Number", "Invalid Number");
+                                                }
+                                            });
                                         }else{
                                             vehicle_id = Integer.parseInt(temp[0]);
                                             final MobileServiceTable<customer> CustomerTable = mClient.getTable("customer", customer.class);
@@ -181,8 +184,7 @@ public class NewService extends AppCompatActivity {
                                                 }
                                             });
                                         }
-                                    }
-                                });
+
                             } catch (final Exception e) {
                                 createAndShowDialog(e, "Error");
                             }
