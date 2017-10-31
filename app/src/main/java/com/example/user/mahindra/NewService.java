@@ -184,7 +184,7 @@ public class NewService extends AppCompatActivity {
                                     }
                                 });
                             } catch (final Exception e) {
-                                createAndShowDialogFromTask(e, "Error");
+                                createAndShowDialog(e, "Error");
                             }
                             return null;
                         }
