@@ -134,7 +134,6 @@ public class NewService extends AppCompatActivity {
                                 final String Details = commaSepValueBuilder.toString();
                                 System.out.println(Details);
                                 final String[] temp = Details.split(",");
-
                                         if (Details.equals("")) {
                                             runOnUiThread(new Runnable() {
                                                 @Override
