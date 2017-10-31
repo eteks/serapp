@@ -10,13 +10,25 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/toolbar"
-        android:title="@string/title"
+        android:title="SERAPP"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
 
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true">
-    <ImageButton
+
+        <TextView
+            android:id="@+id/username1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="end"
+            android:paddingLeft="150dp"
+            android:layout_alignTop="@+id/logout" />
+
+        <ImageButton
         android:id="@+id/logout"
         android:layout_width="40dp"
         android:layout_height="40dp"
@@ -27,31 +39,18 @@
         android:background="@color/colorlogout"
         android:src="@drawable/logout" />
 
-        <TextView
-            android:id="@+id/username1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/textView8"
-            android:layout_alignParentTop="true"
-            android:layout_marginEnd="11dp"
-            android:layout_marginLeft="175dp"
-            android:layout_marginTop="17dp"
-            android:gravity="right"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            android:textStyle="bold" />
     </android.support.v7.widget.Toolbar>
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="93dp"
+        android:layout_marginTop="12dp"
         android:text="New Service"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/custom_toolbar"
         android:layout_centerHorizontal="true" />
 
     <EditText
@@ -81,7 +80,6 @@
         android:id="@+id/display1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
         android:text="Customer Details"
         android:textStyle="bold"
         android:layout_below="@+id/btn_search"
@@ -147,11 +145,11 @@
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="46dp"
         android:text="Vehicle Info"
         android:textStyle="bold"
         android:layout_below="@+id/textView6"
-        android:layout_alignStart="@+id/display1" />
+        android:layout_toStartOf="@+id/textView6" />
 
     <TextView
         android:id="@+id/textView11"
@@ -217,6 +215,18 @@
         android:layout_below="@+id/color"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="17dp" />
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_below="@+id/btn_search"
+        android:layout_toEndOf="@+id/textView12" />
+
+
+
 
 </RelativeLayout>
 

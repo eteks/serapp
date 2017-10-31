@@ -18,9 +18,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.microsoft.windowsazure.mobileservices.*;
+import com.microsoft.windowsazure.mobileservices.http.NextServiceFilterCallback;
 import com.microsoft.windowsazure.mobileservices.http.OkHttpClientFactory;
+import com.microsoft.windowsazure.mobileservices.http.ServiceFilter;
+import com.microsoft.windowsazure.mobileservices.http.ServiceFilterRequest;
+import com.microsoft.windowsazure.mobileservices.http.ServiceFilterResponse;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 import com.squareup.okhttp.OkHttpClient;
 import java.net.MalformedURLException;
@@ -42,17 +52,22 @@ public class NewService extends AppCompatActivity {
     TextView customer_address;
     private MobileServiceTable mTable;
     private MobileServiceClient mClient;
+    private ProgressBar mProgressBar;
     int vehicle_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.newservice);
+        mProgressBar = (ProgressBar) findViewById(R.id.progressBar2);
+        // Initialize the progress bar
+        mProgressBar.setVisibility(ProgressBar.GONE);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.custom_toolbar);
         setSupportActionBar(myToolbar);
         Button newservices = (Button) findViewById(R.id.next);
         newservices.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mProgressBar.setVisibility(View.VISIBLE);
                 Intent intent = new Intent(NewService.this, Complaints.class);
                 String username = getIntent().getStringExtra("username");
                 Bundle extras = new Bundle();
@@ -83,7 +98,7 @@ public class NewService extends AppCompatActivity {
 //        lv = (ListView) findViewById(R.id.lv);
 //        lv.setAdapter(new ArrayAdapter<String>(NewService.this, android.R.layout.simple_expandable_list_item_1, names));
         try {
-            mClient = new MobileServiceClient("http://serapp.azurewebsites.net", this);
+            mClient = new MobileServiceClient("http://serapp.azurewebsites.net", this).withFilter(new ProgressFilter());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -232,6 +247,48 @@ public class NewService extends AppCompatActivity {
                 createAndShowDialog(exception, "Error");
             }
         });
+    }
+
+    class ProgressFilter implements ServiceFilter {
+
+        @Override
+        public ListenableFuture<ServiceFilterResponse> handleRequest(ServiceFilterRequest request, NextServiceFilterCallback nextServiceFilterCallback) {
+
+            final SettableFuture<ServiceFilterResponse> resultFuture = SettableFuture.create();
+
+
+            runOnUiThread(new Runnable() {
+
+                @Override
+                public void run() {
+                    if (mProgressBar != null) mProgressBar.setVisibility(ProgressBar.VISIBLE);
+                }
+            });
+
+            ListenableFuture<ServiceFilterResponse> future = nextServiceFilterCallback.onNext(request);
+
+            Futures.addCallback(future, new FutureCallback<ServiceFilterResponse>() {
+                @Override
+                public void onFailure(Throwable e) {
+                    resultFuture.setException(e);
+                }
+
+                @Override
+                public void onSuccess(ServiceFilterResponse response) {
+                    runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            if (mProgressBar != null) mProgressBar.setVisibility(ProgressBar.GONE);
+                        }
+                    });
+
+                    resultFuture.set(response);
+                }
+            });
+
+            return resultFuture;
+        }
     }
 
 
