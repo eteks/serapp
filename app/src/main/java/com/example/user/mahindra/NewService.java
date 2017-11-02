@@ -98,7 +98,7 @@ public class NewService extends AppCompatActivity {
 //        lv = (ListView) findViewById(R.id.lv);
 //        lv.setAdapter(new ArrayAdapter<String>(NewService.this, android.R.layout.simple_expandable_list_item_1, names));
         try {
-            mClient = new MobileServiceClient("http://serapp.azurewebsites.net", this).withFilter(new ProgressFilter());
+            mClient = new MobileServiceClient("http://servicapp.azurewebsites.net", this).withFilter(new ProgressFilter());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -124,6 +124,7 @@ public class NewService extends AppCompatActivity {
                 customer_mobile = (TextView) findViewById(R.id.customer_contact);
                 customer_address = (TextView) findViewById(R.id.customer_address);
                 final String vehicle_no = etname.getText().toString();
+                System.out.println(vehicle_no);
                 final MobileServiceTable<vehicle> VehicleTable = mClient.getTable("vehicle", vehicle.class);
                 if(vehicle_no.equals("")){
                     createAndShowDialog("Please enter your Vehicle Number", "Invalid Number");
@@ -137,6 +138,7 @@ public class NewService extends AppCompatActivity {
                                         .field("vehicle_reg_no").eq(vehicle_no)
                                         .execute()
                                         .get();
+                                System.out.println(vehicleData);
                                 StringBuilder commaSepValueBuilder = new StringBuilder();
                                 //Looping through the list
                                 for (int i = 0; i < vehicleData.size(); i++) {
@@ -147,7 +149,7 @@ public class NewService extends AppCompatActivity {
                                     }
                                 }
                                 final String Details = commaSepValueBuilder.toString();
-                                System.out.println(Details);
+                                System.out.println("Details: "+Details);
                                 final String[] temp = Details.split(",");
                                         if (Details.equals("")) {
                                             runOnUiThread(new Runnable() {

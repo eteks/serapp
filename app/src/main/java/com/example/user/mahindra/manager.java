@@ -44,7 +44,7 @@ public class manager extends AppCompatActivity {
 
             // Mobile Service URL and key
             mClient = new MobileServiceClient(
-                    "https://serapp.azurewebsites.net",
+                    "http://servicapp.azurewebsites.net",
                     this);
 
             // Extend timeout from default of 10s to 20s
