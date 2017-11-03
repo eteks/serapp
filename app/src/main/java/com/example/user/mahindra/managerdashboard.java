@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static com.example.user.mahindra.MainActivity.MyPREFERENCES;
+import static com.example.user.mahindra.R.id.vehicleList;
 
 /**
  * Created by ets-prabu on 2/11/17.
@@ -33,7 +34,8 @@ public class managerdashboard extends Activity{
     private MobileServiceClient mClient;
     String vehicle_id ;
     private MobileServiceTable<vehicle> vehicleTable;
-    private ListAdapter vehicleAdapter;
+    private vehicleListAdapter vehicleAdapter;
+    public ListView vehicleList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,7 +59,9 @@ public class managerdashboard extends Activity{
         Bundle extras = intent.getExtras();
         String username = extras.getString("username");
         test.setText(username);
-
+        vehicleAdapter = new vehicleListAdapter(this, R.layout.vehicle_list,R.id.textView);
+        vehicleList = (ListView) findViewById(R.id.vehicleList);
+        vehicleList.setAdapter(vehicleAdapter);
         try {
             // Create the Mobile Service Client instance, using the provided
 
@@ -76,64 +80,12 @@ public class managerdashboard extends Activity{
                     return client;
                 }
             });
-
-            // Get the Mobile Service Table instance to use
-            vehicleTable = mClient.getTable("vehicle",vehicle.class);
-
-            // Offline Sync
-            //mToDoTable = mClient.getSyncTable("ToDoItem", ToDoItem.class);
-
-            // Create an adapter to bind the items with the view
-            vehicleAdapter = new ListAdapter(this, R.layout.vehicle_list);
-            ListView vehicleList = (ListView) findViewById(R.id.vehicleList);
-            vehicleList.setAdapter(vehicleAdapter);
-            // Load the items from the Mobile Service
-            AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>(){
-                @Override
-                protected Void doInBackground(Void... params) {
-
-                    try {
-                        final List<vehicle> results = vehicleTable.where().select("vehicle_no","vehicle_id").execute().get();
-
-                        //Offline Sync
-                        //final List<ToDoItem> results = refreshItemsFromMobileServiceTableSyncTable();
-                        StringBuilder commaSepValueBuilder = new StringBuilder();
-                        //Looping through the list
-                        for (int i = 0; i < results.size(); i++) {
-                            commaSepValueBuilder.append(results.get(i));
-
-                            if (i != results.size() - 1) {
-                                commaSepValueBuilder.append(", ");
-                            }
-                        }
-                        final String vehicle = commaSepValueBuilder.toString();
-                        final String[] temp = vehicle.split(",");
-                        vehicle_id = temp[0];
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                vehicleAdapter.clear();
-
-                                for (vehicle item : results) {
-                                    vehicleAdapter.add(item);
-                                }
-                            }
-                        });
-                    } catch (final Exception e){
-                        createAndShowDialogFromTask(e, "Error");
-                    }
-
-                    return null;
-                }
-            };
-
-            runAsyncTask(task);
-
         } catch (MalformedURLException e) {
             createAndShowDialog(new Exception("There was an error creating the Mobile Service. Verify the URL"), "Error");
         } catch (Exception e){
             createAndShowDialog(e, "Error");
         }
+        getVehicleList();
     }
 
     public void onListItemClick(ListView l, View v, int position, long id) {
@@ -173,6 +125,46 @@ public class managerdashboard extends Activity{
                 createAndShowDialog(exception, "Error");
             }
         });
+    }
+
+    public void getVehicleList (){
+        vehicleTable = mClient.getTable("vehicle",vehicle.class);
+        AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>(){
+            @Override
+            protected Void doInBackground(Void... params) {
+
+                try {
+                    final List<vehicle> results = vehicleTable.where().execute().get();
+                    StringBuilder commaSepValueBuilder = new StringBuilder();
+                    //Looping through the list
+                    for (int i = 0; i < results.size(); i++) {
+                        commaSepValueBuilder.append(results.get(i));
+
+                        if (i != results.size() - 1) {
+                            commaSepValueBuilder.append(", ");
+                        }
+                    }
+                    final String vehicle = commaSepValueBuilder.toString();
+                    final String[] temp = vehicle.split(",");
+                    vehicle_id = temp[0];
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                vehicleAdapter.clear();
+                                for (vehicle item : results) {
+                                    vehicleAdapter.add(item);
+                                }
+                            }
+                        });
+                } catch (final Exception e){
+                    createAndShowDialogFromTask(e, "Error");
+                }
+
+                return null;
+            }
+        };
+
+        runAsyncTask(task);
     }
 
 }

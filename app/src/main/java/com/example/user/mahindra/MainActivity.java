@@ -233,22 +233,24 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 //                                            prefs.edit().putString("username", user.username).commit();
 
                                             //To store the user data in session
-                                            if(user.usertype == "Service Agent") {
-                                                Intent intent = new Intent(MainActivity.this, NewService.class);
-                                                intent.putExtra("username", user.username);
-                                                finish();
-                                                startActivity(intent);
-                                            }else if(user.usertype == "Service Manager"){
-                                                Intent intent = new Intent(MainActivity.this, managerdashboard.class);
-                                                finish();
-                                                startActivity(intent);
-                                            }
+
                                             SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                                             SharedPreferences.Editor editor = sharedpreferences.edit();
                                             editor.putString("usertype", user.usertype);
                                             editor.commit();
                                             NotificationsManager.handleNotifications(MainActivity.this, SENDER_ID, MyHandler.class);
                                             registerWithNotificationHubs();
+                                            if(user.usertype.equals("Service Manager")){
+                                                Intent intent = new Intent(MainActivity.this, NewService.class);
+                                                intent.putExtra("username", user.username);
+                                                finish();
+                                                startActivity(intent);
+                                            }else{
+                                                Intent intent = new Intent(MainActivity.this, NewService.class);
+                                                intent.putExtra("username", user.username);
+                                                finish();
+                                                startActivity(intent);
+                                            }
                                         } else {
                                             createAndShowDialog("Your password is wrong! Please check it and try again!!!", "Wrong");
                                             System.out.println("Failed");

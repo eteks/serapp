@@ -47,6 +47,7 @@
         <activity android:name=".QualityDasboard"></activity>
         <activity android:name=".QualityStatus"></activity>
         <activity android:name=".ReserviceStatus"></activity>
+        <activity android:name=".managerdashboard"></activity>
 
         <!--<receiver android:name=".MyHandler" android:enabled="true">-->
             <!--<intent-filter>-->

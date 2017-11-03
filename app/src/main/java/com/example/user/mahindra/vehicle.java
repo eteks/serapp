@@ -4,7 +4,7 @@ package com.example.user.mahindra;
  * Created by ETS-7 on 10/26/2017.
  */
 
-public class vehicle extends complaint {
+public class vehicle {
 
 
     /**
@@ -73,7 +73,9 @@ public class vehicle extends complaint {
         return col_code;
     }
 
-
+    public String getText(){
+        return reg_no;
+    }
     /**
      * Sets the item text
      *

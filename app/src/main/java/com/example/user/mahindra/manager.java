@@ -1,13 +1,17 @@
 package com.example.user.mahindra;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -20,6 +24,8 @@ import java.net.MalformedURLException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+
+import static com.example.user.mahindra.MainActivity.MyPREFERENCES;
 
 
 public class manager extends AppCompatActivity {
@@ -39,6 +45,17 @@ public class manager extends AppCompatActivity {
         setContentView(R.layout.manager);
         Intent intent = getIntent();
         vehicle_id = intent.getStringExtra("vehicle_id");
+        ImageButton logout = (ImageButton) findViewById(R.id.logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(manager.this, MainActivity.class);
+                SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                sharedpreferences.edit().remove("usertype").commit();
+                finish();
+                startActivity(intent);
+            }
+        });
         try {
             // Create the Mobile Service Client instance, using the provided
 

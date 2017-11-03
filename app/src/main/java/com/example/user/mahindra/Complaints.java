@@ -353,21 +353,7 @@ public class Complaints extends Activity {
         runAsyncTask(task);
     }
 
-    /**
-     * Mark an item as completed in the Mobile Service Table
-     *
-     // * @param item
-     *            The item to mark
-     */
-//    public void checkItemInTable(complaint item) throws ExecutionException, InterruptedException {
-//        mToDoTable.update(item).get();
-//    }
-
     private void refreshItemsFromTable() {
-
-        // Get the items that weren't marked as completed and add them in the
-        // adapter
-
         AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>(){
             @Override
             protected Void doInBackground(Void... params) {
