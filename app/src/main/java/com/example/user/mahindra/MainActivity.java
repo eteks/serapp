@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         clientUsertype.setOnItemSelectedListener(this);
 
         try {
-            mClient = new MobileServiceClient("http://serapp.azurewebsites.net",this).withFilter(new MainActivity.ProgressFilter());
+            mClient = new MobileServiceClient("http://servicapp.azurewebsites.net",this).withFilter(new MainActivity.ProgressFilter());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

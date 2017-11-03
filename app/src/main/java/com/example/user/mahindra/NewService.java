@@ -98,7 +98,7 @@ public class NewService extends AppCompatActivity {
 //        lv = (ListView) findViewById(R.id.lv);
 //        lv.setAdapter(new ArrayAdapter<String>(NewService.this, android.R.layout.simple_expandable_list_item_1, names));
         try {
-            mClient = new MobileServiceClient("http://serapp.azurewebsites.net", this).withFilter(new ProgressFilter());
+            mClient = new MobileServiceClient("http://servicapp.azurewebsites.net", this).withFilter(new ProgressFilter());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -168,6 +168,7 @@ public class NewService extends AppCompatActivity {
                                                         .get();
                                             } catch (InterruptedException e) {
                                                 e.printStackTrace();
+
                                             } catch (ExecutionException e) {
                                                 e.printStackTrace();
                                             }

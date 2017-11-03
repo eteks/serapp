@@ -4,13 +4,12 @@ package com.example.user.mahindra;
  * Created by ETS-7 on 10/26/2017.
  */
 
-public class vehicle {
+public class vehicle extends complaint {
 
 
     /**
      * Represents an item in a ToDo list
      */
-
 
     /**
      * Item text
@@ -21,7 +20,7 @@ public class vehicle {
     private String e_no;
     @com.google.gson.annotations.SerializedName("vehicle_reg_no")
     private String reg_no;
-    @com.google.gson.annotations.SerializedName("colour_code")
+    @com.google.gson.annotations.SerializedName("color_code")
     private String col_code;
     @com.google.gson.annotations.SerializedName("vehicle_id")
     private String v_id;

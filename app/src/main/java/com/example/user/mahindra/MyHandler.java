@@ -60,7 +60,7 @@ public class MyHandler extends NotificationsHandler {
         String vehicle = Complaints.vehicle_id;
         System.out.println("vehicle ID:"+vehicle);
         Intent intent = new Intent(context, manager.class);
-        intent.putExtra("vehicle",vehicle);
+        intent.putExtra("vehicle_id",vehicle);
 //        Intent intent = new Intent(context,manager.class);
 //        Bundle extras = new Bundle();
 //        extras.putString("vehicle_id",vehicle_id);

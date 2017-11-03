@@ -38,13 +38,13 @@ public class manager extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manager);
         Intent intent = getIntent();
-        vehicle_id = intent.getStringExtra("vehicle");
+        vehicle_id = intent.getStringExtra("vehicle_id");
         try {
             // Create the Mobile Service Client instance, using the provided
 
             // Mobile Service URL and key
             mClient = new MobileServiceClient(
-                    "https://serapp.azurewebsites.net",
+                    "https://servicapp.azurewebsites.net",
                     this);
 
             // Extend timeout from default of 10s to 20s
