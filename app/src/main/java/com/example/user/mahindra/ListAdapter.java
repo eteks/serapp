@@ -70,12 +70,14 @@ import static com.example.user.mahindra.R.id.checkBox;
                             Complaints activity = (Complaints) mContext;
                             activity.insertItem(position);
                         }
+                        checkBox.setChecked(true);
                     }
                     if(!checkBox.isChecked()){
                         if (mContext instanceof Complaints) {
                             Complaints activity = (Complaints) mContext;
                             activity.deleteItem(position);
                         }
+                        checkBox.setChecked(false);
                     }
                 }
             });

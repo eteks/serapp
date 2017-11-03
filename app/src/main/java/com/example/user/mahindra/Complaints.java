@@ -188,7 +188,7 @@ public class Complaints extends Activity {
         record.setVehicle(vehicle);
         record.setComplaint(item+1);
         addItem(record);
-        //System.out.println("item"+item);
+        System.out.println("item"+item);
         Button submit = (Button) findViewById(R.id.re_service);
         submit.setOnClickListener(new View.OnClickListener() {
 
