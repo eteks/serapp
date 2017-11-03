@@ -124,6 +124,7 @@ public class NewService extends AppCompatActivity {
                 customer_mobile = (TextView) findViewById(R.id.customer_contact);
                 customer_address = (TextView) findViewById(R.id.customer_address);
                 final String vehicle_no = etname.getText().toString();
+                System.out.println(vehicle_no);
                 final MobileServiceTable<vehicle> VehicleTable = mClient.getTable("vehicle", vehicle.class);
                 if(vehicle_no.equals("")){
                     createAndShowDialog("Please enter your Vehicle Number", "Invalid Number");
@@ -137,6 +138,7 @@ public class NewService extends AppCompatActivity {
                                         .field("vehicle_reg_no").eq(vehicle_no)
                                         .execute()
                                         .get();
+                                System.out.println(vehicleData);
                                 StringBuilder commaSepValueBuilder = new StringBuilder();
                                 //Looping through the list
                                 for (int i = 0; i < vehicleData.size(); i++) {
@@ -147,58 +149,57 @@ public class NewService extends AppCompatActivity {
                                     }
                                 }
                                 final String Details = commaSepValueBuilder.toString();
-                                System.out.println(Details);
+                                System.out.println("Details: "+Details);
                                 final String[] temp = Details.split(",");
-                                        if (Details.equals("")) {
-                                            runOnUiThread(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    createAndShowDialog("Please check your Vehicle Number", "Invalid Number");
-                                                }
-                                            });
-                                        }else{
-                                            vehicle_id = Integer.parseInt(temp[0]);
-                                            final MobileServiceTable<customer> CustomerTable = mClient.getTable("customer", customer.class);
-                                            List<customer> result = null;
-                                            try {
-                                                result = CustomerTable
-                                                        .where()
-                                                        .field("vehicle_id").eq(vehicle_id)
-                                                        .execute()
-                                                        .get();
-                                            } catch (InterruptedException e) {
-                                                e.printStackTrace();
-
-                                            } catch (ExecutionException e) {
-                                                e.printStackTrace();
-                                            }
-                                            //Looping through the list
-                                            StringBuilder CustomerValues = new StringBuilder();
-                                            for (int i = 0; i < result.size(); i++) {
-                                                System.out.println(result);
-                                                CustomerValues.append(result.get(i));
-                                                if (i != result.size() - 1) {
-                                                    CustomerValues.append(",");
-                                                }
-                                            }
-                                            String CustomerSeparatedValues = CustomerValues.toString();
-                                            System.out.println(CustomerSeparatedValues);
-                                            final String[] temp1 = CustomerSeparatedValues.split("\\*");
-                                            System.out.println(temp1[0]);
-                                            System.out.println(temp1[1]);
-                                            System.out.println(temp1[2]);
-                                            runOnUiThread(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    vehicle_reg_no.setText(etname.getText().toString().toUpperCase());
-                                                    vehicle_engine_no.setText(temp[1]);
-                                                    vehicle_colour_code.setText(temp[2]);
-                                                    customer_name.setText(temp1[0]);
-                                                    customer_mobile.setText(temp1[1]);
-                                                    customer_address.setText(temp1[2]);
-                                                }
-                                            });
+                                if (Details.equals("")) {
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            createAndShowDialog("Please check your Vehicle Number", "Invalid Number");
                                         }
+                                    });
+                                }else{
+                                    vehicle_id = Integer.parseInt(temp[0]);
+                                    final MobileServiceTable<customer> CustomerTable = mClient.getTable("customer", customer.class);
+                                    List<customer> result = null;
+                                    try {
+                                        result = CustomerTable
+                                                .where()
+                                                .field("vehicle_id").eq(vehicle_id)
+                                                .execute()
+                                                .get();
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    } catch (ExecutionException e) {
+                                        e.printStackTrace();
+                                    }
+                                    //Looping through the list
+                                    StringBuilder CustomerValues = new StringBuilder();
+                                    for (int i = 0; i < result.size(); i++) {
+                                        System.out.println(result);
+                                        CustomerValues.append(result.get(i));
+                                        if (i != result.size() - 1) {
+                                            CustomerValues.append(",");
+                                        }
+                                    }
+                                    String CustomerSeparatedValues = CustomerValues.toString();
+                                    System.out.println(CustomerSeparatedValues);
+                                    final String[] temp1 = CustomerSeparatedValues.split("\\*");
+                                    System.out.println(temp1[0]);
+                                    System.out.println(temp1[1]);
+                                    System.out.println(temp1[2]);
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            vehicle_reg_no.setText(etname.getText().toString().toUpperCase());
+                                            vehicle_engine_no.setText(temp[1]);
+                                            vehicle_colour_code.setText(temp[2]);
+                                            customer_name.setText(temp1[0]);
+                                            customer_mobile.setText(temp1[1]);
+                                            customer_address.setText(temp1[2]);
+                                        }
+                                    });
+                                }
 
                             } catch (final Exception e) {
                                 createAndShowDialog(e, "Error");
