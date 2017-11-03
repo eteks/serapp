@@ -60,7 +60,6 @@ import static com.example.user.mahindra.R.id.checkBox;
             checkBox.setText(currentItem.getText());
             checkBox.setChecked(false);
             checkBox.setEnabled(true);
-            final int index = 0;
             checkBox.setOnClickListener(new View.OnClickListener() {
 
                 @Override
@@ -87,4 +86,5 @@ import static com.example.user.mahindra.R.id.checkBox;
 
 
     }
+
 

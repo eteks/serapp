@@ -74,7 +74,9 @@ public class vehicle {
         return col_code;
     }
 
-
+    public String getText(){
+        return reg_no;
+    }
     /**
      * Sets the item text
      *
