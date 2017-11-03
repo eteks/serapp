@@ -4,12 +4,13 @@ package com.example.user.mahindra;
  * Created by ETS-7 on 10/26/2017.
  */
 
-public class vehicle extends complaint {
+public class vehicle {
 
 
     /**
      * Represents an item in a ToDo list
      */
+
 
     /**
      * Item text
