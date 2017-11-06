@@ -251,6 +251,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                                                 finish();
                                                 startActivity(intent);
                                             }
+
                                         } else {
                                             createAndShowDialog("Your password is wrong! Please check it and try again!!!", "Wrong");
                                             System.out.println("Failed");
@@ -441,7 +442,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
     }
 
-    private class ProgressFilter implements ServiceFilter {
+    class ProgressFilter implements ServiceFilter {
 
         @Override
         public ListenableFuture<ServiceFilterResponse> handleRequest(ServiceFilterRequest request, NextServiceFilterCallback nextServiceFilterCallback) {

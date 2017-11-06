@@ -101,6 +101,7 @@ public class Complaints extends Activity {
     private GoogleCloudMessaging gcm;
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 
+
     /**
      * EditText containing the "New To Do" text
      */
@@ -118,6 +119,9 @@ public class Complaints extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.complaints);
+        mProgressBar = (ProgressBar) findViewById(R.id.complaintprogressBar);
+        // Initialize the progress bar
+        mProgressBar.setVisibility(ProgressBar.GONE);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.custom_toolbar);
         //setSupportActionBar(myToolbar);
         ImageButton logout = (ImageButton) findViewById(R.id.logout);
@@ -140,6 +144,8 @@ public class Complaints extends Activity {
         System.out.println("vehicle_id"+vehicle_id);
         vehicle_no = extras.getString("vehicle_no");
         System.out.println("vehicle_no"+vehicle_no);
+        TextView test1 = (TextView)findViewById(R.id.vehicleNo);
+        test1.setText(vehicle_no);
 
         try {
             // Create the Mobile Service Client instance, using the provided
