@@ -196,11 +196,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     System.out.println(clientUsertype.getSelectedItem().toString());
                     final UsersAuth user = new UsersAuth();
                     user.username = clientUsername.getText().toString();
-                    //user.username = "admin";
+//                    user.username = "service";
                     user.password = clientPassword.getText().toString();
-                    //user.password = "password";
+//                    user.password = "service";
                     user.usertype = clientUsertype.getSelectedItem().toString();
-                    //user.usertype = "Quality Agent";
+//                    user.usertype = "Service Agent";
                     final MobileServiceTable<UsersAuth> mTable = mClient.getTable("user_auth", UsersAuth.class);
 
                     AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
@@ -241,7 +241,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                                             NotificationsManager.handleNotifications(MainActivity.this, SENDER_ID, MyHandler.class);
                                             registerWithNotificationHubs();
                                             if(user.usertype.equals("Service Manager")){
-                                                Intent intent = new Intent(MainActivity.this, NewService.class);
+                                                Intent intent = new Intent(MainActivity.this, managerdashboard.class);
                                                 intent.putExtra("username", user.username);
                                                 finish();
                                                 startActivity(intent);

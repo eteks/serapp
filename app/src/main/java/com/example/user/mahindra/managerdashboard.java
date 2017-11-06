@@ -10,12 +10,22 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
+import com.microsoft.windowsazure.mobileservices.http.NextServiceFilterCallback;
 import com.microsoft.windowsazure.mobileservices.http.OkHttpClientFactory;
+import com.microsoft.windowsazure.mobileservices.http.ServiceFilter;
+import com.microsoft.windowsazure.mobileservices.http.ServiceFilterRequest;
+import com.microsoft.windowsazure.mobileservices.http.ServiceFilterResponse;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 import com.squareup.okhttp.OkHttpClient;
 
@@ -24,7 +34,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static com.example.user.mahindra.MainActivity.MyPREFERENCES;
-import static com.example.user.mahindra.R.id.vehicleList;
+
 
 /**
  * Created by ets-prabu on 2/11/17.
@@ -35,7 +45,7 @@ public class managerdashboard extends Activity{
     String vehicle_id ;
     private MobileServiceTable<vehicle> vehicleTable;
     private vehicleListAdapter vehicleAdapter;
-    public ListView vehicleList;
+    private ProgressBar mProgressBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,16 +69,13 @@ public class managerdashboard extends Activity{
         Bundle extras = intent.getExtras();
         String username = extras.getString("username");
         test.setText(username);
-        vehicleAdapter = new vehicleListAdapter(this, R.layout.vehicle_list,R.id.textView);
-        vehicleList = (ListView) findViewById(R.id.vehicleList);
-        vehicleList.setAdapter(vehicleAdapter);
         try {
             // Create the Mobile Service Client instance, using the provided
 
             // Mobile Service URL and key
             mClient = new MobileServiceClient(
                     "https://servicapp.azurewebsites.net",
-                    this);
+                    this).withFilter(new managerdashboard.ProgressFilter());
 
             // Extend timeout from default of 10s to 20s
             mClient.setAndroidHttpClientFactory(new OkHttpClientFactory() {
@@ -80,6 +87,18 @@ public class managerdashboard extends Activity{
                     return client;
                 }
             });
+            vehicleAdapter = new vehicleListAdapter(this, R.layout.vehicle_list);
+            ListView vehicleList = (ListView) findViewById(R.id.listViewToDo);
+            vehicleList.setAdapter(vehicleAdapter);
+            vehicleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    vehicle_id = vehicleListAdapter.vehicle_id[position];
+                    Intent intent = new Intent(managerdashboard.this,manager.class);
+                    intent.putExtra("vehicle_id",vehicle_id);
+                    startActivity(intent);
+                }
+            });
         } catch (MalformedURLException e) {
             createAndShowDialog(new Exception("There was an error creating the Mobile Service. Verify the URL"), "Error");
         } catch (Exception e){
@@ -88,11 +107,6 @@ public class managerdashboard extends Activity{
         getVehicleList();
     }
 
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        Intent intent = new Intent(managerdashboard.this,manager.class);
-        intent.putExtra("vehicle_id",vehicle_id);
-        startActivity(intent);
-    }
 
     private void createAndShowDialog(Exception exception, String title) {
         Throwable ex = exception;
@@ -165,6 +179,48 @@ public class managerdashboard extends Activity{
         };
 
         runAsyncTask(task);
+    }
+
+    private class ProgressFilter implements ServiceFilter {
+
+        @Override
+        public ListenableFuture<ServiceFilterResponse> handleRequest(ServiceFilterRequest request, NextServiceFilterCallback nextServiceFilterCallback) {
+
+            final SettableFuture<ServiceFilterResponse> resultFuture = SettableFuture.create();
+
+
+            runOnUiThread(new Runnable() {
+
+                @Override
+                public void run() {
+                    if (mProgressBar != null) mProgressBar.setVisibility(ProgressBar.VISIBLE);
+                }
+            });
+
+            ListenableFuture<ServiceFilterResponse> future = nextServiceFilterCallback.onNext(request);
+
+            Futures.addCallback(future, new FutureCallback<ServiceFilterResponse>() {
+                @Override
+                public void onFailure(Throwable e) {
+                    resultFuture.setException(e);
+                }
+
+                @Override
+                public void onSuccess(ServiceFilterResponse response) {
+                    runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            if (mProgressBar != null) mProgressBar.setVisibility(ProgressBar.GONE);
+                        }
+                    });
+
+                    resultFuture.set(response);
+                }
+            });
+
+            return resultFuture;
+        }
     }
 
 }

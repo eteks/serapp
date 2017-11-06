@@ -53,7 +53,7 @@
         android:layout_below="@+id/custom_toolbar"
         android:layout_centerHorizontal="true" />
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/vehicleNo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -65,6 +65,16 @@
         android:inputType="textNoSuggestions|textPersonName"
         android:textAlignment="center"
         android:textSize="14sp" />
+
+
+    <MultiAutoCompleteTextView
+        android:id="@+id/vehicleList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/vehicleNo"
+        android:layout_toEndOf="@+id/textView13" />
+
+
 
     <Button
         android:id="@+id/btn_search"

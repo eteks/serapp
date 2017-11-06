@@ -3,6 +3,7 @@ package com.example.user.mahindra;
 import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.SearchManager;
 import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
@@ -12,12 +13,19 @@ import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.text.method.ScrollingMovementMethod;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.MultiAutoCompleteTextView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -39,6 +47,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 import static com.example.user.mahindra.MainActivity.MyPREFERENCES;
+import static com.microsoft.windowsazure.mobileservices.table.query.QueryOperations.val;
 
 
 public class NewService extends AppCompatActivity {
@@ -54,15 +63,21 @@ public class NewService extends AppCompatActivity {
     private MobileServiceClient mClient;
     private ProgressBar mProgressBar;
     int vehicle_id;
+    private vehicleListAdapter vehicleAdapter;
+    private MobileServiceTable<vehicle> vehicleTable;
+    AutoCompleteTextView vehicleNo;
+    MultiAutoCompleteTextView vehicleList;
+    String vehicles[] = {"1","2","3","4","5","6","7","8","9","10"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.newservice);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar2);
-        // Initialize the progress bar
         mProgressBar.setVisibility(ProgressBar.GONE);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.custom_toolbar);
         setSupportActionBar(myToolbar);
+        Intent intent = getIntent();
+        vehicleNo = (AutoCompleteTextView) findViewById(R.id.vehicleNo);
         Button newservices = (Button) findViewById(R.id.next);
         newservices.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +126,9 @@ public class NewService extends AppCompatActivity {
                 return client;
             }
         });
+        getVehicleList();
+        vehicleNo = (AutoCompleteTextView)findViewById(R.id.vehicleNo);
+        vehicleList =(MultiAutoCompleteTextView)findViewById(R.id.vehicleList);
         b = (Button) findViewById(R.id.btn_search);
         b.setOnClickListener(new View.OnClickListener() {
 
@@ -216,7 +234,9 @@ public class NewService extends AppCompatActivity {
 
 
         });
+
     }
+
 
     private AsyncTask<Void, Void, Void> runAsyncTask(AsyncTask<Void, Void, Void> task) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
@@ -292,5 +312,54 @@ public class NewService extends AppCompatActivity {
         }
     }
 
+    public void getVehicleList (){
+        vehicleTable = mClient.getTable("vehicle",vehicle.class);
+        AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>(){
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+                    final List<vehicle> results = vehicleTable.where().field("deleted").eq(val("false")).select("vehicle_reg_no").execute().get();
+                    StringBuilder commaSepValueBuilder = new StringBuilder();
+                    //Looping through the list
+                    for (int i = 0; i < results.size(); i++) {
+                        commaSepValueBuilder.append(results.get(i));
 
+                        if (i != results.size() - 1) {
+                            commaSepValueBuilder.append(",");
+                        }
+                    }
+                    final String vehicle = commaSepValueBuilder.toString();
+                    final String[] temp = vehicle.split(",");
+                    int in =0;
+                    for(int index = 3; index < temp.length; index+=4){
+                        System.out.println("Vehicle "+temp[index]);
+                        vehicles[in] = temp[index];
+                        in++;
+                    }
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            vehicleList();
+                        }
+                    });
+                } catch (final Exception e){
+                    createAndShowDialogFromTask(e, "Error");
+                }
+
+                return null;
+            }
+        };
+
+        runAsyncTask(task);
+    }
+
+    public void vehicleList(){
+        for(int i = 0; i < vehicles.length; i++)
+            System.out.println(vehicles[i]);
+        final ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,vehicles);
+        vehicleNo.setAdapter(adapter);
+        vehicleNo.setThreshold(1);
+        vehicleList.setAdapter(adapter);
+        vehicleList.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+    }
 }

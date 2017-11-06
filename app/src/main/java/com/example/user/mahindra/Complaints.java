@@ -147,7 +147,7 @@ public class Complaints extends Activity {
             // Mobile Service URL and key
             mClient = new MobileServiceClient(
                     "http://servicapp.azurewebsites.net",
-                    this);
+                    this).withFilter(new Complaints.ProgressFilter());
 
             // Extend timeout from default of 10s to 20s
             mClient.setAndroidHttpClientFactory(new OkHttpClientFactory() {
