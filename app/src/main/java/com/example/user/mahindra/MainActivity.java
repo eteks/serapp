@@ -245,7 +245,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                                                 intent.putExtra("username", user.username);
                                                 finish();
                                                 startActivity(intent);
-                                            }else{
+                                            }else if(user.usertype.equals("Service Agent")){
                                                 Intent intent = new Intent(MainActivity.this, NewService.class);
                                                 intent.putExtra("username", user.username);
                                                 finish();

@@ -65,8 +65,8 @@ public class NewService extends AppCompatActivity {
     int vehicle_id;
     private vehicleListAdapter vehicleAdapter;
     private MobileServiceTable<vehicle> vehicleTable;
-    AutoCompleteTextView vehicleNo;
-    MultiAutoCompleteTextView vehicleList;
+    AutoCompleteTextView vehicleno;
+    MultiAutoCompleteTextView vehiclelist;
     String vehicles[] = {"1","2","3","4","5","6","7","8","9","10"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +77,7 @@ public class NewService extends AppCompatActivity {
         Toolbar myToolbar = (Toolbar) findViewById(R.id.custom_toolbar);
         setSupportActionBar(myToolbar);
         Intent intent = getIntent();
-        vehicleNo = (AutoCompleteTextView) findViewById(R.id.vehicleNo);
+        vehicleno = (AutoCompleteTextView) findViewById(R.id.vehicleNo);
         Button newservices = (Button) findViewById(R.id.next);
         newservices.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,8 +127,8 @@ public class NewService extends AppCompatActivity {
             }
         });
         getVehicleList();
-        vehicleNo = (AutoCompleteTextView)findViewById(R.id.vehicleNo);
-        vehicleList =(MultiAutoCompleteTextView)findViewById(R.id.vehicleList);
+        vehicleno = (AutoCompleteTextView)findViewById(R.id.vehicleNo);
+        vehiclelist =(MultiAutoCompleteTextView)findViewById(R.id.vehicleList);
         b = (Button) findViewById(R.id.btn_search);
         b.setOnClickListener(new View.OnClickListener() {
 
@@ -332,7 +332,7 @@ public class NewService extends AppCompatActivity {
                     final String[] temp = vehicle.split(",");
                     int in =0;
                     for(int index = 3; index < temp.length; index+=4){
-                        System.out.println("Vehicle "+temp[index]);
+//                        System.out.println("Vehicle "+temp[index]);
                         vehicles[in] = temp[index];
                         in++;
                     }
@@ -354,12 +354,12 @@ public class NewService extends AppCompatActivity {
     }
 
     public void vehicleList(){
-        for(int i = 0; i < vehicles.length; i++)
-            System.out.println(vehicles[i]);
+//        for(int i = 0; i < vehicles.length; i++)
+//            System.out.println(vehicles[i]);
         final ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,vehicles);
-        vehicleNo.setAdapter(adapter);
-        vehicleNo.setThreshold(1);
-        vehicleList.setAdapter(adapter);
-        vehicleList.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+        vehicleno.setAdapter(adapter);
+        vehicleno.setThreshold(1);
+        vehiclelist.setAdapter(adapter);
+        vehiclelist.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
     }
 }

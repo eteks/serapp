@@ -52,10 +52,10 @@ public class vehicleListAdapter extends ArrayAdapter<vehicle>{
             LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
             row = inflater.inflate(mLayoutResourceId, parent, false);
         }
-        System.out.println("Current item :"+currentItem);
+//        System.out.println("Current item :"+currentItem);
         row.setTag(currentItem);
         final TextView text = (TextView)  row.findViewById(R.id.textView);
-        System.out.println(currentItem.getText());
+//        System.out.println(currentItem.getText());
         String [] title = currentItem.getText().split(",");
         text.setText(title[0]);
         final TextView vehicleStatus = (TextView)  row.findViewById(R.id.vehicleStatus);
