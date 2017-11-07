@@ -45,176 +45,175 @@
             android:textStyle="bold" />
     </android.support.v7.widget.Toolbar>
 
-    <TextView
-        android:id="@+id/heading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="93dp"
-        android:fontFamily="sans-serif-smallcaps"
-        android:text="New Service"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/custom_toolbar"
+        android:layout_alignParentStart="true">
 
-    <!--<EditText-->
-    <!--android:id="@+id/vehicleNo"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_below="@+id/heading"-->
-    <!--android:layout_marginTop="23dp"-->
-    <!--android:layout_toEndOf="@+id/textView10"-->
-    <!--android:ems="10"-->
-    <!--android:hint="Vehicle No."-->
-    <!--android:inputType="textNoSuggestions|textPersonName"-->
-    <!--android:textAlignment="center"-->
-    <!--android:textSize="14sp" />-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <!--<Button-->
-    <!--android:id="@+id/btn_search"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_alignStart="@+id/heading"-->
-    <!--android:layout_below="@+id/vehicleNo"-->
-    <!--android:layout_marginTop="18dp"-->
-    <!--android:text="Search"-->
-    <!--android:background="@drawable/rounded_edge"/>-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="20dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true">
 
-    <TextView
-        android:id="@+id/cdisplay1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:layout_marginLeft="10dp"
-        android:textColor="@color/subtitle"
-        android:text="Customer Details"
-        android:textStyle="bold"
-        android:layout_below="@+id/heading"
-        android:layout_alignEnd="@+id/heading"
-        android:layout_marginEnd="67dp" />
+                <TextView
+                    android:id="@+id/heading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:text="New Service"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
-        android:gravity="left"
-        android:text="Name"
-        android:layout_below="@+id/cdisplay1"
-        android:layout_alignStart="@+id/cdisplay1" />
+                <TextView
+                    android:id="@+id/cdisplay1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/heading"
+                    android:layout_below="@+id/heading"
+                    android:layout_marginEnd="67dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="35dp"
+                    android:text="Customer Details"
+                    android:textColor="@color/subtitle"
+                    android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/contactnum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/name"
-        android:layout_below="@+id/name"
-        android:layout_marginTop="14dp"
-        android:gravity="left"
-        android:text="Contact No." />
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/cdisplay1"
+                    android:layout_below="@+id/cdisplay1"
+                    android:layout_marginTop="17dp"
+                    android:gravity="left"
+                    android:text="Name" />
 
-    <TextView
-        android:id="@+id/address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/contactnum"
-        android:layout_below="@+id/contactnum"
-        android:layout_marginTop="16dp"
-        android:gravity="left"
-        android:text="Address" />
+                <TextView
+                    android:id="@+id/contactnum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/name"
+                    android:layout_below="@+id/name"
+                    android:layout_marginTop="14dp"
+                    android:gravity="left"
+                    android:text="Contact No." />
 
-    <TextView
-        android:id="@+id/namedata"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/contactnum"
-        android:layout_toEndOf="@+id/contactnum"
-        android:layout_marginStart="44dp" />
+                <TextView
+                    android:id="@+id/address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/contactnum"
+                    android:layout_below="@+id/contactnum"
+                    android:layout_marginTop="16dp"
+                    android:gravity="left"
+                    android:text="Address" />
 
-    <TextView
-        android:id="@+id/contactdata"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/contactnum"
-        android:layout_alignBottom="@+id/contactnum"
-        android:layout_alignStart="@+id/namedata" />
+                <TextView
+                    android:id="@+id/namedata"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/contactnum"
+                    android:layout_marginStart="44dp"
+                    android:layout_toEndOf="@+id/contactnum" />
 
-    <TextView
-        android:id="@+id/addressdata"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/contactdata"
-        android:layout_alignTop="@+id/address"
+                <TextView
+                    android:id="@+id/contactdata"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/contactnum"
+                    android:layout_alignBottom="@+id/contactnum"
+                    android:layout_alignStart="@+id/namedata" />
 
-        />
+                <TextView
+                    android:id="@+id/addressdata"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/contactdata"
+                    android:layout_alignTop="@+id/address"
 
-    <TextView
-        android:id="@+id/vehiclesub"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Vehicle Info"
-        android:textStyle="bold"
-        android:textColor="@color/subtitle"
-        android:layout_marginTop="80dp"
-        android:layout_below="@+id/address"
-        android:layout_alignStart="@+id/cdisplay1" />
+                    />
 
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/address"
-        android:layout_below="@+id/vehiclesub"
-        android:layout_marginTop="20dp"
-        android:gravity="left"
-        android:text="Vehicle No." />
+                <TextView
+                    android:id="@+id/vehiclesub"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/cdisplay1"
+                    android:layout_below="@+id/address"
+                    android:layout_marginTop="80dp"
+                    android:text="Vehicle Info"
+                    android:textColor="@color/subtitle"
+                    android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/enginenum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView11"
-        android:layout_below="@+id/textView11"
-        android:layout_marginTop="20dp"
-        android:gravity="left"
-        android:text="Engine No." />
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/address"
+                    android:layout_below="@+id/vehiclesub"
+                    android:layout_marginTop="20dp"
+                    android:gravity="left"
+                    android:text="Vehicle No." />
 
-    <TextView
-        android:id="@+id/colorcode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/enginenum"
-        android:layout_below="@+id/enginenum"
-        android:layout_marginTop="16dp"
-        android:gravity="left"
-        android:text="Color Code" />
+                <TextView
+                    android:id="@+id/enginenum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/textView11"
+                    android:layout_below="@+id/textView11"
+                    android:layout_marginTop="20dp"
+                    android:gravity="left"
+                    android:text="Engine No." />
 
-    <TextView
-        android:id="@+id/vehicledata"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/addressdata"
-        android:layout_alignTop="@+id/textView11"
-        android:layout_toEndOf="@+id/btn_search"
-        />
+                <TextView
+                    android:id="@+id/colorcode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/enginenum"
+                    android:layout_below="@+id/enginenum"
+                    android:layout_marginTop="16dp"
+                    android:gravity="left"
+                    android:text="Color Code" />
 
-    <TextView
-        android:id="@+id/enginedata"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/colorcode"
-        android:layout_alignStart="@+id/vehicledata" />
+                <TextView
+                    android:id="@+id/vehicledata"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/addressdata"
+                    android:layout_alignTop="@+id/textView11"
+                    android:layout_toEndOf="@+id/btn_search" />
 
-    <TextView
-        android:id="@+id/colordata"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/colorcode"
-        android:layout_alignBottom="@+id/colorcode"
-        android:layout_alignStart="@+id/enginedata"
-        android:textAlignment="textStart" />
+                <TextView
+                    android:id="@+id/enginedata"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/colorcode"
+                    android:layout_alignStart="@+id/vehicledata" />
+
+                <TextView
+                    android:id="@+id/colordata"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/colorcode"
+                    android:layout_alignBottom="@+id/colorcode"
+                    android:layout_alignStart="@+id/enginedata"
+                    android:textAlignment="textStart" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+
 
 </RelativeLayout>
 
