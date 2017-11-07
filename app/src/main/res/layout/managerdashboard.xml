@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.user.mahindra.Complaints"
     android:background="@color/lightblue"
     >
 
@@ -52,29 +51,21 @@
         android:layout_height="wrap_content"
         tools:listitem="@layout/vehicle_list"
         android:padding="6dip"
-        android:layout_below="@+id/status"
+        android:layout_below="@+id/custom_toolbar"
         android:layout_alignParentStart="true">
 
     </ListView>
 
-    <ProgressBar
-        android:id="@+id/progressBar2"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:id="@+id/status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/custom_toolbar"
-        android:layout_marginEnd="110dp"
-        android:layout_marginTop="14dp"
-        android:fontFamily="sans-serif"
-        android:text="Status" />
+    <!--<TextView-->
+        <!--android:id="@+id/status"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_below="@+id/custom_toolbar"-->
+        <!--android:layout_marginEnd="110dp"-->
+        <!--android:layout_marginTop="14dp"-->
+        <!--android:fontFamily="sans-serif"-->
+        <!--android:text="Status" />-->
 
 
 </RelativeLayout>

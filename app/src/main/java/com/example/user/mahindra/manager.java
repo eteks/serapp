@@ -43,6 +43,10 @@ public class manager extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manager);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.custom_toolbar);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setTitle("SERAPP");
+        myToolbar.setTitleTextColor(0xFFFFFFFF);
         Intent intent = getIntent();
         vehicle_id = intent.getStringExtra("vehicle");
         ImageButton logout = (ImageButton) findViewById(R.id.logout);
@@ -79,12 +83,12 @@ public class manager extends AppCompatActivity {
         } catch (Exception e){
             createAndShowDialog(e, "Error");
         }
-        vehicle_reg_no = (TextView) findViewById(R.id.display);
-        vehicle_engine_no = (TextView) findViewById(R.id.engine_no);
-        vehicle_colour_code = (TextView) findViewById(R.id.color);
-        customer_name = (TextView) findViewById(R.id.customer_name);
-        customer_mobile = (TextView) findViewById(R.id.customer_contact);
-        customer_address = (TextView) findViewById(R.id.customer_address);
+        vehicle_reg_no = (TextView) findViewById(R.id.vehicledata);
+        vehicle_engine_no = (TextView) findViewById(R.id.enginedata);
+        vehicle_colour_code = (TextView) findViewById(R.id.colordata);
+        customer_name = (TextView) findViewById(R.id.namedata);
+        customer_mobile = (TextView) findViewById(R.id.contactdata);
+        customer_address = (TextView) findViewById(R.id.addressdata);
         final String[][] temp = new String[1][3];
         final String[][] temp1 = new String[1][3];
         final MobileServiceTable<vehicle> VehicleTable = mClient.getTable("vehicle", vehicle.class);

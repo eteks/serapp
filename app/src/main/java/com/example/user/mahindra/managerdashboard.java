@@ -8,12 +8,12 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.common.util.concurrent.FutureCallback;
@@ -40,17 +40,15 @@ import static com.example.user.mahindra.MainActivity.MyPREFERENCES;
  * Created by ets-prabu on 2/11/17.
  */
 
-public class managerdashboard extends Activity{
+public class managerdashboard extends Activity {
     private MobileServiceClient mClient;
     String vehicle_id ;
     private MobileServiceTable<vehicle> vehicleTable;
     private vehicleListAdapter vehicleAdapter;
-    private ProgressBar mProgressBar;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.complaints);
+        setContentView(R.layout.managerdashboard);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.custom_toolbar);
         //setSupportActionBar(myToolbar);
         ImageButton logout = (ImageButton) findViewById(R.id.logout);
@@ -75,7 +73,7 @@ public class managerdashboard extends Activity{
             // Mobile Service URL and key
             mClient = new MobileServiceClient(
                     "https://servicapp.azurewebsites.net",
-                    this).withFilter(new managerdashboard.ProgressFilter());
+                    this);
 
             // Extend timeout from default of 10s to 20s
             mClient.setAndroidHttpClientFactory(new OkHttpClientFactory() {
@@ -179,48 +177,6 @@ public class managerdashboard extends Activity{
         };
 
         runAsyncTask(task);
-    }
-
-    private class ProgressFilter implements ServiceFilter {
-
-        @Override
-        public ListenableFuture<ServiceFilterResponse> handleRequest(ServiceFilterRequest request, NextServiceFilterCallback nextServiceFilterCallback) {
-
-            final SettableFuture<ServiceFilterResponse> resultFuture = SettableFuture.create();
-
-
-            runOnUiThread(new Runnable() {
-
-                @Override
-                public void run() {
-                    if (mProgressBar != null) mProgressBar.setVisibility(ProgressBar.VISIBLE);
-                }
-            });
-
-            ListenableFuture<ServiceFilterResponse> future = nextServiceFilterCallback.onNext(request);
-
-            Futures.addCallback(future, new FutureCallback<ServiceFilterResponse>() {
-                @Override
-                public void onFailure(Throwable e) {
-                    resultFuture.setException(e);
-                }
-
-                @Override
-                public void onSuccess(ServiceFilterResponse response) {
-                    runOnUiThread(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            if (mProgressBar != null) mProgressBar.setVisibility(ProgressBar.GONE);
-                        }
-                    });
-
-                    resultFuture.set(response);
-                }
-            });
-
-            return resultFuture;
-        }
     }
 
 }
