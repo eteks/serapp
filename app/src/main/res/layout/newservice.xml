@@ -57,30 +57,40 @@
         android:layout_below="@+id/custom_toolbar"
         android:layout_centerHorizontal="true" />
 
-         <EditText
-            android:id="@+id/vehicleNo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView2"
-            android:layout_marginEnd="13dp"
-            android:layout_marginTop="36dp"
-            android:layout_toStartOf="@+id/btn_search"
-            android:backgroundTint="@android:color/holo_red_light"
-            android:ems="10"
-            android:hint="Vehicle No."
-            android:inputType="textNoSuggestions|textPersonName"
-            android:textAlignment="center"
-            android:textSize="14sp" />
+    <AutoCompleteTextView
+        android:id="@+id/vehicleNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_marginEnd="13dp"
+        android:layout_marginTop="36dp"
+        android:layout_toStartOf="@+id/btn_search"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:ems="10"
+        android:hint="Vehicle No."
+        android:inputType="textNoSuggestions|textPersonName"
+        android:textAlignment="center"
+        android:textSize="14sp" />
 
-         <Button
-            android:id="@+id/btn_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/vehicleNo"
-            android:layout_alignTop="@+id/vehicleNo"
-            android:layout_toEndOf="@+id/textView2"
-            android:background="@drawable/rounded_edge"
-            android:text="Search" />
+
+    <MultiAutoCompleteTextView
+        android:id="@+id/vehicleList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/vehicleNo"
+        android:layout_toEndOf="@+id/textView13" />
+
+
+
+    <Button
+        android:id="@+id/btn_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/vehicleNo"
+        android:layout_alignTop="@+id/vehicleNo"
+        android:layout_toEndOf="@+id/textView2"
+        android:background="@drawable/rounded_edge"
+        android:text="Search" />
 
     <TextView
         android:id="@+id/display1"

@@ -34,31 +34,35 @@
         android:layout_alignEnd="@+id/clientUsertype"
         android:backgroundTint="@android:color/holo_red_light"/>
 
+
     <EditText
         android:id="@+id/clientPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
         android:ems="10"
+        android:fontFamily="sans-serif"
         android:hint="Password"
         android:inputType="textPassword"
         tools:layout_editor_absoluteX="95dp"
         tools:layout_editor_absoluteY="164dp"
-        android:layout_marginTop="21dp"
         android:layout_below="@+id/clientUsername"
         android:layout_alignStart="@+id/clientUsername"
         android:backgroundTint="@android:color/holo_red_light"/>
+
 
     <Button
         android:id="@+id/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="loggingIn"
-        android:text="Login"
-        android:textAlignment="center"
         android:layout_below="@+id/clientUsertype"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="27dp"
-        android:background="@drawable/rounded_edge"/>
+        android:background="@drawable/rounded_edge"
+        android:fontFamily="sans-serif-smallcaps"
+        android:onClick="loggingIn"
+        android:text="Login"
+        android:textAlignment="center" />
 
     <Button
         android:id="@+id/notification"

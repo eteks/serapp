@@ -21,27 +21,24 @@ import static com.example.user.mahindra.R.id.checkBox;
 /**
  * Adapter to bind a ToDoItem List to a view
  */
-public class vehicleListAdapter extends ArrayAdapter<vehicle> {
+public class vehicleListAdapter extends ArrayAdapter<vehicle>{
 
     /**
      * Adapter context
      */
     private Context mContext;
-
+    public static  String[] vehicle_id = new String[100];
     /**
      * Adapter View layout
      */
     private int mLayoutResourceId;
+    int index = 0;
 
-    private int resourceId;
-
-
-    public vehicleListAdapter(Context context, int layoutResourceId,int textViewResourceId) {
+    public vehicleListAdapter(Context context, int layoutResourceId) {
         super(context, layoutResourceId);
 
         mContext = context;
         mLayoutResourceId = layoutResourceId;
-        resourceId = textViewResourceId;
     }
 
     /**
@@ -58,12 +55,13 @@ public class vehicleListAdapter extends ArrayAdapter<vehicle> {
         System.out.println("Current item :"+currentItem);
         row.setTag(currentItem);
         final TextView text = (TextView)  row.findViewById(R.id.textView);
-        text.setText(currentItem.getText());
+        System.out.println(currentItem.getText());
+        String [] title = currentItem.getText().split(",");
+        text.setText(title[0]);
+        final TextView vehicleStatus = (TextView)  row.findViewById(R.id.vehicleStatus);
+        vehicle_id[position] = title[1];
         return row;
     }
-
-
-
 }
 
 

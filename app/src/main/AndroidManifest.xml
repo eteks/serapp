@@ -39,15 +39,30 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity"/>
         </activity>
-
+        <!--<activity android:name=".SearchResultsActivity" >-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.SEARCH" />-->
+            <!--</intent-filter>-->
+            <!--<meta-data android:name="android.app.searchable"-->
+                <!--android:resource="@xml/searchable"/>-->
+        <!--</activity>-->
         <activity android:name=".ServiceDashBoard"></activity>
-        <activity android:name=".NewService"></activity>
         <activity android:name=".Complaints"></activity>
         <activity android:name=".ServiceStatus"></activity>
         <activity android:name=".QualityDasboard"></activity>
         <activity android:name=".QualityStatus"></activity>
         <activity android:name=".ReserviceStatus"></activity>
         <activity android:name=".managerdashboard"></activity>
+        <activity
+            android:name=".NewService"
+            android:label="@string/app_name" >
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
 
         <!--<receiver android:name=".MyHandler" android:enabled="true">-->
             <!--<intent-filter>-->
@@ -71,6 +86,9 @@
         <service
             android:name="com.example.user.mahindra.RegistrationIntentService"
             android:exported="false" />
+
+
+
     </application>
 
 

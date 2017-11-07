@@ -4,7 +4,7 @@ package com.example.user.mahindra;
  * Created by ETS-7 on 10/26/2017.
  */
 
-public class vehicle {
+public class vehicle{
 
 
     /**
@@ -75,7 +75,7 @@ public class vehicle {
     }
 
     public String getText(){
-        return reg_no;
+        return reg_no+","+v_id;
     }
     /**
      * Sets the item text
