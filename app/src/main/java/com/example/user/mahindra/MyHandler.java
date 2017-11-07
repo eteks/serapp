@@ -3,8 +3,6 @@ package com.example.user.mahindra;
 /**
  * Created by ets-2 on 26/10/17.
  */
-import com.microsoft.windowsazure.notifications.NotificationsHandler;
-
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -15,7 +13,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 
-import static com.example.user.mahindra.R.id.notification;
+import com.microsoft.windowsazure.notifications.NotificationsHandler;
 
 
 public class MyHandler extends NotificationsHandler {
