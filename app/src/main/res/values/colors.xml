@@ -2,11 +2,15 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#40ffac</color>
-    <color name="colorlogout">#78d7c9</color>
+    <color name="colorAccent">#B71C1C</color>
+    <color name="colorlogout">#e30013</color>
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
-    <color name="lightblue">#c214d4ff</color>
-    <color name="toolbar">#fd12a9ca</color>
+    <color name="lightblue">#00eeeeee</color>
+    <color name="toolbar">#E53935</color>
+    <color name="hinttext">#c2c2c2</color>
+    <color name="subtitle">#424242</color>
+    <color name="highlight">#D32F2F</color>
+
 
 </resources>

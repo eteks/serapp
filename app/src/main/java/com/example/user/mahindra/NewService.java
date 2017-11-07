@@ -76,6 +76,8 @@ public class NewService extends AppCompatActivity {
         mProgressBar.setVisibility(ProgressBar.GONE);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.custom_toolbar);
         setSupportActionBar(myToolbar);
+        getSupportActionBar().setTitle("SERAPP");
+        myToolbar.setTitleTextColor(0xFFFFFFFF);
         Intent intent = getIntent();
         vehicleno = (AutoCompleteTextView) findViewById(R.id.vehicleNo);
         Button newservices = (Button) findViewById(R.id.next);

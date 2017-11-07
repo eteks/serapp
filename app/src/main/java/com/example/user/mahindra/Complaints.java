@@ -27,6 +27,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.view.Menu;
@@ -68,7 +69,7 @@ import javax.crypto.spec.SecretKeySpec;
 import static com.example.user.mahindra.MainActivity.MyPREFERENCES;
 import static com.microsoft.windowsazure.mobileservices.table.query.QueryOperations.*;
 
-public class Complaints extends Activity {
+public class Complaints extends AppCompatActivity {
 
     /**
      * Mobile Service Client reference
@@ -123,6 +124,9 @@ public class Complaints extends Activity {
         // Initialize the progress bar
         mProgressBar.setVisibility(ProgressBar.GONE);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.custom_toolbar);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setTitle("SERAPP");
+        myToolbar.setTitleTextColor(0xFFFFFFFF);
         //setSupportActionBar(myToolbar);
         ImageButton logout = (ImageButton) findViewById(R.id.logout);
         logout.setOnClickListener(new View.OnClickListener() {
