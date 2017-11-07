@@ -63,6 +63,8 @@ public class NewService extends AppCompatActivity {
         mProgressBar.setVisibility(ProgressBar.GONE);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.custom_toolbar);
         setSupportActionBar(myToolbar);
+        getSupportActionBar().setTitle("SERAPP");
+        myToolbar.setTitleTextColor(0xFFFFFFFF);
         Button newservices = (Button) findViewById(R.id.next);
         newservices.setOnClickListener(new View.OnClickListener() {
             @Override

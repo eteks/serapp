@@ -44,7 +44,7 @@ public class manager extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manager);
         Intent intent = getIntent();
-        vehicle_id = intent.getStringExtra("vehicle_id");
+        vehicle_id = intent.getStringExtra("vehicle");
         ImageButton logout = (ImageButton) findViewById(R.id.logout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override

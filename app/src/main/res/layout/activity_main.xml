@@ -5,18 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.user.mahindra.MainActivity"
-    android:background="@drawable/appbackpic">
+    android:background="@drawable/background">
 
 
 
     <ImageView
         android:id="@+id/photo_image_view"
-        android:layout_width="209dp"
+        android:layout_width="309dp"
         android:layout_height="200dp"
         android:padding="25dp"
         android:scaleType="centerCrop"
 
-        android:src="@drawable/serclip"
+        android:src="@drawable/logo"
         android:layout_marginTop="42dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -31,7 +31,8 @@
         tools:layout_editor_absoluteX="95dp"
         tools:layout_editor_absoluteY="96dp"
         android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/photo_image_view" />
+        android:layout_alignEnd="@+id/clientUsertype"
+        android:backgroundTint="@android:color/holo_red_light"/>
 
     <EditText
         android:id="@+id/clientPassword"
@@ -44,7 +45,8 @@
         tools:layout_editor_absoluteY="164dp"
         android:layout_marginTop="21dp"
         android:layout_below="@+id/clientUsername"
-        android:layout_alignStart="@+id/clientUsername" />
+        android:layout_alignStart="@+id/clientUsername"
+        android:backgroundTint="@android:color/holo_red_light"/>
 
     <Button
         android:id="@+id/login"
@@ -72,18 +74,19 @@
         android:id="@+id/clientUsertype"
         android:layout_width="210dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
         android:layout_below="@+id/clientPassword"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="21dp" />
+        android:layout_centerHorizontal="true" />
 
     <ProgressBar
         android:id="@+id/loginprogressBar"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/clientUsername"
+        android:indeterminateTint="@color/toolbar"
+        android:layout_above="@+id/clientPassword"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="17dp" />
+        android:layout_marginBottom="28dp" />
 
     <!--<TextView-->
         <!--android:id="@+id/text_hello"-->
