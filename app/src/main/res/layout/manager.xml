@@ -25,17 +25,19 @@
             android:adjustViewBounds="false"
             android:onClick="loggingOut"
             android:scaleType="fitCenter"
-            android:background="@color/colorlogout"
+            android:background="@color/toolbar"
             android:src="@drawable/logout" />
 
         <TextView
             android:id="@+id/username1"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignEnd="@+id/textView8"
             android:layout_alignParentTop="true"
+            android:layout_gravity="end"
             android:layout_marginEnd="11dp"
             android:layout_marginLeft="175dp"
+            android:paddingLeft="100dp"
             android:layout_marginTop="17dp"
             android:gravity="right"
             android:textColor="@android:color/black"
@@ -135,10 +137,9 @@
         android:id="@+id/contactdata"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView5"
-        android:layout_alignStart="@+id/namedata"
-
-        />
+        android:layout_alignBaseline="@+id/contactnum"
+        android:layout_alignBottom="@+id/contactnum"
+        android:layout_alignStart="@+id/namedata" />
 
     <TextView
         android:id="@+id/addressdata"

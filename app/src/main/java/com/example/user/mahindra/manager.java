@@ -49,6 +49,11 @@ public class manager extends AppCompatActivity {
         myToolbar.setTitleTextColor(0xFFFFFFFF);
         Intent intent = getIntent();
         vehicle_id = intent.getStringExtra("vehicle");
+//        System.out.println("vehicle ID"+vehicle_id);
+        TextView test = (TextView)findViewById(R.id.username1);
+        Bundle extras = intent.getExtras();
+        String username = extras.getString("username");
+        test.setText(username);
         ImageButton logout = (ImageButton) findViewById(R.id.logout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +65,7 @@ public class manager extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         try {
             // Create the Mobile Service Client instance, using the provided
 

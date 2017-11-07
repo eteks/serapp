@@ -93,7 +93,6 @@ public class NewService extends AppCompatActivity {
                 extras.putString("vehicle_no",String.valueOf(etname.getText().toString().toUpperCase()));
                 intent.putExtras(extras);
                 System.out.println(vehicle_id);
-                finish();
                 startActivity(intent);
 
             }

@@ -224,7 +224,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                                     @Override
                                     public void run() {
                                         ONE_TIME = 0;
-                                        if (Password.equals("")) {
+                                        if(user.username.equals("")){
+                                            createAndShowDialog("Please enter your username","Error");
+                                        }
+                                        else if (Password.equals("")) {
                                             createAndShowDialog("Please check your username", "Wrong");
                                         } else if (user.password.equals(Password)) {
                                             System.out.println("Success Login");

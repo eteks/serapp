@@ -40,7 +40,7 @@ import static com.example.user.mahindra.MainActivity.MyPREFERENCES;
  * Created by ets-prabu on 2/11/17.
  */
 
-public class managerdashboard extends Activity {
+public class managerdashboard extends AppCompatActivity {
     private MobileServiceClient mClient;
     String vehicle_id ;
     private MobileServiceTable<vehicle> vehicleTable;
@@ -50,6 +50,9 @@ public class managerdashboard extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.managerdashboard);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.custom_toolbar);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setTitle("SERAPP");
+        myToolbar.setTitleTextColor(0xFFFFFFFF);
         //setSupportActionBar(myToolbar);
         ImageButton logout = (ImageButton) findViewById(R.id.logout);
         logout.setOnClickListener(new View.OnClickListener() {
@@ -65,7 +68,7 @@ public class managerdashboard extends Activity {
         TextView test = (TextView)findViewById(R.id.username1);
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
-        String username = extras.getString("username");
+        final String username = extras.getString("username");
         test.setText(username);
         try {
             // Create the Mobile Service Client instance, using the provided
@@ -93,7 +96,10 @@ public class managerdashboard extends Activity {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     vehicle_id = vehicleListAdapter.vehicle_id[position];
                     Intent intent = new Intent(managerdashboard.this,manager.class);
-                    intent.putExtra("vehicle_id",vehicle_id);
+                    Bundle extras = new Bundle();
+                    extras.putString("vehicle",vehicle_id);
+                    extras.putString("username",username);
+                    intent.putExtras(extras);
                     startActivity(intent);
                 }
             });

@@ -93,14 +93,15 @@
         android:id="@+id/textView20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/re_service"
-        android:layout_below="@+id/custom_toolbar"
-        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-smallcaps"
         android:gravity="center"
         android:text="Complaints"
         android:textColor="@color/black"
         android:textSize="19sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_below="@+id/custom_toolbar"
+        android:layout_alignStart="@+id/re_service"
+        android:layout_marginTop="12dp" />
 
     <TextView
         android:id="@+id/vehicleNo"
