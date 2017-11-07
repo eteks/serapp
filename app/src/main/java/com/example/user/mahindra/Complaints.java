@@ -180,7 +180,7 @@ public class Complaints extends AppCompatActivity {
             initLocalStore().get();
             // Create an adapter to bind the items with the view
             mAdapter = new ListAdapter(this, R.layout.checkable_list_layout);
-            ListView listViewTodo = (ListView) findViewById(R.id.listViewToDo);
+            ListView listViewTodo = (ListView) findViewById(R.id.listViewDo);
             listViewTodo.setAdapter(mAdapter);
             // Load the items from the Mobile Service
             refreshItemsFromTable();
@@ -585,10 +585,6 @@ public class Complaints extends AppCompatActivity {
 
             return resultFuture;
         }
-    }
-
-    public String getVehicle(){
-        return vehicle_id;
     }
 
 }

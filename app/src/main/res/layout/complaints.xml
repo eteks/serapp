@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.user.mahindra.Complaints"
     android:background="@color/lightblue"
     >
 
@@ -45,7 +44,7 @@
         <!--android:layout_toStartOf="@+id/username1"-->
         <!--android:layout_alignEnd="@+id/complaintprogressBar" />-->
     <ListView
-        android:id="@+id/listViewToDo"
+        android:id="@+id/listViewDo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:listitem="@layout/checkable_list_layout"
