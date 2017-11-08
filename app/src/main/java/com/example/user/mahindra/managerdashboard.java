@@ -14,7 +14,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
@@ -45,10 +47,13 @@ public class managerdashboard extends AppCompatActivity {
     String vehicle_id ;
     private MobileServiceTable<vehicle> vehicleTable;
     private vehicleListAdapter vehicleAdapter;
+    private ProgressBar mProgressBar;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.managerdashboard);
+        mProgressBar = (ProgressBar) findViewById(R.id.managerDBprogressBar);
+        mProgressBar.setVisibility(ProgressBar.GONE);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.custom_toolbar);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setTitle("SERAPP");
@@ -58,6 +63,7 @@ public class managerdashboard extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(managerdashboard.this, "Safely Logged out!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(managerdashboard.this, MainActivity.class);
                 SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                 sharedpreferences.edit().remove("usertype").commit();
@@ -76,7 +82,7 @@ public class managerdashboard extends AppCompatActivity {
             // Mobile Service URL and key
             mClient = new MobileServiceClient(
                     "https://servicapp.azurewebsites.net",
-                    this);
+                    this).withFilter(new managerdashboard.ProgressFilter());
 
             // Extend timeout from default of 10s to 20s
             mClient.setAndroidHttpClientFactory(new OkHttpClientFactory() {
@@ -183,6 +189,47 @@ public class managerdashboard extends AppCompatActivity {
         };
 
         runAsyncTask(task);
+    }
+    class ProgressFilter implements ServiceFilter {
+
+        @Override
+        public ListenableFuture<ServiceFilterResponse> handleRequest(ServiceFilterRequest request, NextServiceFilterCallback nextServiceFilterCallback) {
+
+            final SettableFuture<ServiceFilterResponse> resultFuture = SettableFuture.create();
+
+
+            runOnUiThread(new Runnable() {
+
+                @Override
+                public void run() {
+                    if (mProgressBar != null) mProgressBar.setVisibility(ProgressBar.VISIBLE);
+                }
+            });
+
+            ListenableFuture<ServiceFilterResponse> future = nextServiceFilterCallback.onNext(request);
+
+            Futures.addCallback(future, new FutureCallback<ServiceFilterResponse>() {
+                @Override
+                public void onFailure(Throwable e) {
+                    resultFuture.setException(e);
+                }
+
+                @Override
+                public void onSuccess(ServiceFilterResponse response) {
+                    runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            if (mProgressBar != null) mProgressBar.setVisibility(ProgressBar.GONE);
+                        }
+                    });
+
+                    resultFuture.set(response);
+                }
+            });
+
+            return resultFuture;
+        }
     }
 
 }

@@ -53,7 +53,9 @@ public class MyHandler extends NotificationsHandler {
 //        final String vehicle_no = bundle.getString("vehicle_no");
 //        System.out.println("vehicle detail in notification page"+vehicle_no);
         String vehicle_no = Complaints.vehicle_no;
+        System.out.println("Vehicle NO :"+vehicle_no);
         String msg = "New service has been registered for this vehicle number "+vehicle_no;
+        System.out.println(msg);
  //       String msg = "New service has been registered for this vehicle number";
         String vehicle = Complaints.vehicle_id;
         System.out.println("vehicle ID:"+vehicle);

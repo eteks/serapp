@@ -40,7 +40,7 @@
             android:paddingLeft="100dp"
             android:layout_marginTop="17dp"
             android:gravity="right"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
     </android.support.v7.widget.Toolbar>
@@ -215,6 +215,15 @@
         android:layout_alignBottom="@+id/colorcode"
         android:layout_alignStart="@+id/enginedata"
         android:textAlignment="textStart" />
+
+    <ProgressBar
+        android:id="@+id/managerprogressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/addressdata"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp" />
 
 </RelativeLayout>
 

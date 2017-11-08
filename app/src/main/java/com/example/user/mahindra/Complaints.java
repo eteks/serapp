@@ -111,7 +111,7 @@ public class Complaints extends AppCompatActivity {
     /**
      * Progress spinner to use for table operations
      */
-    private ProgressBar mProgressBar;
+//    private ProgressBar mProgressBar;
 
     /**
      * Initializes the activity
@@ -120,9 +120,9 @@ public class Complaints extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.complaints);
-        mProgressBar = (ProgressBar) findViewById(R.id.complaintprogressBar);
+//        mProgressBar = (ProgressBar) findViewById(R.id.complaintprogressBar);
         // Initialize the progress bar
-        mProgressBar.setVisibility(ProgressBar.GONE);
+//        mProgressBar.setVisibility(ProgressBar.GONE);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.custom_toolbar);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setTitle("SERAPP");
@@ -132,6 +132,7 @@ public class Complaints extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(Complaints.this, "Safely Logged out!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(Complaints.this, MainActivity.class);
                 SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                 sharedpreferences.edit().remove("usertype").commit();
@@ -157,7 +158,7 @@ public class Complaints extends AppCompatActivity {
             // Mobile Service URL and key
             mClient = new MobileServiceClient(
                     "http://servicapp.azurewebsites.net",
-                    this).withFilter(new Complaints.ProgressFilter());
+                    this);
 
             // Extend timeout from default of 10s to 20s
             mClient.setAndroidHttpClientFactory(new OkHttpClientFactory() {
@@ -543,48 +544,6 @@ public class Complaints extends AppCompatActivity {
         }
 
         return token;
-    }
-
-    private class ProgressFilter implements ServiceFilter {
-
-        @Override
-        public ListenableFuture<ServiceFilterResponse> handleRequest(ServiceFilterRequest request, NextServiceFilterCallback nextServiceFilterCallback) {
-
-            final SettableFuture<ServiceFilterResponse> resultFuture = SettableFuture.create();
-
-
-            runOnUiThread(new Runnable() {
-
-                @Override
-                public void run() {
-                    if (mProgressBar != null) mProgressBar.setVisibility(ProgressBar.VISIBLE);
-                }
-            });
-
-            ListenableFuture<ServiceFilterResponse> future = nextServiceFilterCallback.onNext(request);
-
-            Futures.addCallback(future, new FutureCallback<ServiceFilterResponse>() {
-                @Override
-                public void onFailure(Throwable e) {
-                    resultFuture.setException(e);
-                }
-
-                @Override
-                public void onSuccess(ServiceFilterResponse response) {
-                    runOnUiThread(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            if (mProgressBar != null) mProgressBar.setVisibility(ProgressBar.GONE);
-                        }
-                    });
-
-                    resultFuture.set(response);
-                }
-            });
-
-            return resultFuture;
-        }
     }
 
 }

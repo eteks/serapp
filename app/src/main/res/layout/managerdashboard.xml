@@ -42,7 +42,7 @@
             android:paddingLeft="100dp"
             android:layout_marginTop="17dp"
             android:gravity="right"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
     </android.support.v7.widget.Toolbar>
@@ -55,9 +55,20 @@
         tools:listitem="@layout/vehicle_list"
         android:padding="6dip"
         android:layout_below="@+id/custom_toolbar"
-        android:layout_alignParentStart="true">
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="308dp">
 
     </ListView>
+
+    <ProgressBar
+        android:id="@+id/managerDBprogressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="147dp" />
 
     <!--<TextView-->
         <!--android:id="@+id/status"-->

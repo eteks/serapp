@@ -28,6 +28,7 @@ import android.widget.ListView;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
@@ -63,6 +64,8 @@ public class NewService extends AppCompatActivity {
     private MobileServiceClient mClient;
     private ProgressBar mProgressBar;
     int vehicle_id;
+    String vehicle_reg ;
+    boolean flag = false;
     private vehicleListAdapter vehicleAdapter;
     private MobileServiceTable<vehicle> vehicleTable;
     AutoCompleteTextView vehicleno;
@@ -76,7 +79,7 @@ public class NewService extends AppCompatActivity {
         mProgressBar.setVisibility(ProgressBar.GONE);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.custom_toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setTitle("SERAPP");
+        getSupportActionBar().setTitle("Car Service");
         myToolbar.setTitleTextColor(0xFFFFFFFF);
         Intent intent = getIntent();
         vehicleno = (AutoCompleteTextView) findViewById(R.id.vehicleNo);
@@ -84,23 +87,29 @@ public class NewService extends AppCompatActivity {
         newservices.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mProgressBar.setVisibility(View.VISIBLE);
-                Intent intent = new Intent(NewService.this, Complaints.class);
-                String username = getIntent().getStringExtra("username");
-                Bundle extras = new Bundle();
-                extras.putString("username", username);
-                extras.putString("vehicle_id",String.valueOf(vehicle_id));
-                extras.putString("vehicle_no",String.valueOf(etname.getText().toString().toUpperCase()));
-                intent.putExtras(extras);
-                System.out.println(vehicle_id);
-                startActivity(intent);
-
+                etname = (EditText) findViewById(R.id.vehicleNo);
+                final String vehicle_no = etname.getText().toString();
+                if(flag) {
+                   Intent intent = new Intent(NewService.this, Complaints.class);
+                   String username = getIntent().getStringExtra("username");
+                   Bundle extras = new Bundle();
+                   extras.putString("username", username);
+                   extras.putString("vehicle_id", String.valueOf(vehicle_id));
+                   extras.putString("vehicle_no", vehicle_reg);
+                   intent.putExtras(extras);
+                   System.out.println(vehicle_id);
+                   startActivity(intent);
+                }
+                else{
+                    createAndShowDialog("Please enter valid Vehicle Number", "Error");
+                }
             }
         });
         ImageButton logout = (ImageButton) findViewById(R.id.logout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(NewService.this, "Safely Logged out!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(NewService.this, MainActivity.class);
                 SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                 sharedpreferences.edit().remove("usertype").commit();
@@ -210,7 +219,9 @@ public class NewService extends AppCompatActivity {
                                             runOnUiThread(new Runnable() {
                                                 @Override
                                                 public void run() {
-                                                    vehicle_reg_no.setText(etname.getText().toString().toUpperCase());
+                                                    flag = true;
+                                                    vehicle_reg = temp[3];
+                                                    vehicle_reg_no.setText(temp[3]);
                                                     vehicle_engine_no.setText(temp[1]);
                                                     vehicle_colour_code.setText(temp[2]);
                                                     customer_name.setText(temp1[0]);
