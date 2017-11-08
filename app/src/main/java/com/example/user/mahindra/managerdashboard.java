@@ -56,7 +56,7 @@ public class managerdashboard extends AppCompatActivity {
         mProgressBar.setVisibility(ProgressBar.GONE);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.custom_toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setTitle("SERAPP");
+        getSupportActionBar().setTitle("Car Service");
         myToolbar.setTitleTextColor(0xFFFFFFFF);
         //setSupportActionBar(myToolbar);
         ImageButton logout = (ImageButton) findViewById(R.id.logout);
