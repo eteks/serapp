@@ -45,7 +45,7 @@ public class manager extends AppCompatActivity {
         setContentView(R.layout.manager);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.custom_toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setTitle("SERAPP");
+        getSupportActionBar().setTitle("Car Service");
         myToolbar.setTitleTextColor(0xFFFFFFFF);
         Intent intent = getIntent();
         vehicle_id = intent.getStringExtra("vehicle");
