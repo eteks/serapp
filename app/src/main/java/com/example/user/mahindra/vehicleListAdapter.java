@@ -57,6 +57,7 @@ public class vehicleListAdapter extends ArrayAdapter<vehicle>{
         final TextView text = (TextView)  row.findViewById(R.id.textView);
 //        System.out.println(currentItem.getText());
         String [] title = currentItem.getText().split(",");
+//        System.out.println(title[0]);
         text.setText(title[0]);
         final TextView vehicleStatus = (TextView)  row.findViewById(R.id.vehicleStatus);
         vehicle_id[position] = title[1];

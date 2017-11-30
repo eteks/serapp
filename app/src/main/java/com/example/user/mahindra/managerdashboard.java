@@ -63,7 +63,7 @@ public class managerdashboard extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(managerdashboard.this, "Safely Logged out!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(managerdashboard.this, "Logged out!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(managerdashboard.this, MainActivity.class);
                 SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                 sharedpreferences.edit().remove("usertype").commit();
@@ -81,7 +81,7 @@ public class managerdashboard extends AppCompatActivity {
 
             // Mobile Service URL and key
             mClient = new MobileServiceClient(
-                    "https://servicapp.azurewebsites.net",
+                    "https://carserviceapp.azurewebsites.net",
                     this).withFilter(new managerdashboard.ProgressFilter());
 
             // Extend timeout from default of 10s to 20s
@@ -159,16 +159,17 @@ public class managerdashboard extends AppCompatActivity {
 
                 try {
                     final List<vehicle> results = vehicleTable.where().execute().get();
+//                    System.out.println(results);
                     StringBuilder commaSepValueBuilder = new StringBuilder();
                     //Looping through the list
                     for (int i = 0; i < results.size(); i++) {
                         commaSepValueBuilder.append(results.get(i));
-
                         if (i != results.size() - 1) {
                             commaSepValueBuilder.append(", ");
                         }
                     }
                     final String vehicle = commaSepValueBuilder.toString();
+//                    System.out.println(vehicle);
                     final String[] temp = vehicle.split(",");
                     vehicle_id = temp[0];
                         runOnUiThread(new Runnable() {
@@ -176,6 +177,7 @@ public class managerdashboard extends AppCompatActivity {
                             public void run() {
                                 vehicleAdapter.clear();
                                 for (vehicle item : results) {
+//                                    System.out.println(item);
                                     vehicleAdapter.add(item);
                                 }
                             }

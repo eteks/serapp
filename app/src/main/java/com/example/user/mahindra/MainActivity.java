@@ -110,9 +110,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         clientUsertype.setOnItemSelectedListener(this);
 
         try {
-            mClient = new MobileServiceClient(
-                    "http://servicapp.azurewebsites.net",
-                    this).withFilter(new MainActivity.ProgressFilter());
+            mClient = new MobileServiceClient("http://carserviceapp.azurewebsites.net",this).withFilter(new MainActivity.ProgressFilter());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -178,9 +176,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             public void onClick(View view) {
                 ONE_TIME++;
                 if (ONE_TIME == 1) {
-                    System.out.println(clientUsername.getText().toString());
-                    System.out.println(clientPassword.getText().toString());
-                    System.out.println(clientUsertype.getSelectedItem().toString());
+//                    System.out.println(clientUsername.getText().toString());
+//                    System.out.println(clientPassword.getText().toString());
+//                    System.out.println(clientUsertype.getSelectedItem().toString());
                     final UsersAuth user = new UsersAuth();
                     user.username = clientUsername.getText().toString();
 //                    user.username = "service";
@@ -207,7 +205,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                                     }
                                 }
                                 final String Password = commaSepValueBuilder.toString();
-                                System.out.println(Password);
+//                                System.out.println(Password);
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -353,7 +351,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 //        Intent intent = new Intent(this, RegistrationIntentService.class);
 //        startService(intent);
         if (checkPlayServices()) {
-            System.out.println("checkPlayServices called");
+//            System.out.println("checkPlayServices called");
             // Start IntentService to register this application with GCM.
             Intent intent = new Intent(this, RegistrationIntentService.class);
             startService(intent);

@@ -132,7 +132,7 @@ public class Complaints extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(Complaints.this, "Safely Logged out!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Complaints.this, "Logged out!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(Complaints.this, MainActivity.class);
                 SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                 sharedpreferences.edit().remove("usertype").commit();
@@ -157,7 +157,7 @@ public class Complaints extends AppCompatActivity {
 
             // Mobile Service URL and key
             mClient = new MobileServiceClient(
-                    "http://servicapp.azurewebsites.net",
+                    "http://carserviceapp.azurewebsites.net",
                     this);
 
             // Extend timeout from default of 10s to 20s

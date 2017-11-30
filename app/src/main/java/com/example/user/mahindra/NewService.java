@@ -101,7 +101,7 @@ public class NewService extends AppCompatActivity {
                    startActivity(intent);
                 }
                 else{
-                    createAndShowDialog("Please enter valid Vehicle Number", "Error");
+                    createAndShowDialog("Please enter the Vehicle Number", "Error");
                 }
             }
         });
@@ -109,7 +109,7 @@ public class NewService extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(NewService.this, "Safely Logged out!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(NewService.this, "Logged out!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(NewService.this, MainActivity.class);
                 SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                 sharedpreferences.edit().remove("usertype").commit();
@@ -123,7 +123,7 @@ public class NewService extends AppCompatActivity {
 //        lv = (ListView) findViewById(R.id.lv);
 //        lv.setAdapter(new ArrayAdapter<String>(NewService.this, android.R.layout.simple_expandable_list_item_1, names));
         try {
-            mClient = new MobileServiceClient("http://servicapp.azurewebsites.net", this).withFilter(new ProgressFilter());
+            mClient = new MobileServiceClient("http://carserviceapp.azurewebsites.net", this).withFilter(new ProgressFilter());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -155,7 +155,7 @@ public class NewService extends AppCompatActivity {
                 System.out.println(vehicle_no);
                 final MobileServiceTable<vehicle> VehicleTable = mClient.getTable("vehicle", vehicle.class);
                 if(vehicle_no.equals("")){
-                    createAndShowDialog("Please enter your Vehicle Number", "Invalid Number");
+                    createAndShowDialog("Please enter the Vehicle Number", "Invalid Number");
                 }else {
                     AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
                         @Override
