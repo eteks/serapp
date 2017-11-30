@@ -5,8 +5,8 @@ package com.example.user.mahindra;
  */
 
 public class NotificationSetting {
-    public static String HubFullAccess = "Endpoint=sb://servicapp.servicebus.windows.net/;SharedAccessKeyName=DefaultFullSharedAccessSignature;SharedAccessKey=quLK5JBScKY0h9IE0eulCYw3Y+axpMw9sHUEBq5nlI4=";
+    public static String HubFullAccess = "Endpoint=sb://carserviceapp.servicebus.windows.net/;SharedAccessKeyName=DefaultFullSharedAccessSignature;SharedAccessKey=PnOjJ7V1qVcWYnYKYr9kbese2u6JOJ94DD900PyTA3o=";
     public static String SenderId = "973440221227";
-    public static String HubName = "pushnotification";
-    public static String HubListenConnectionString = "Endpoint=sb://servicapp.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=U9Llg3fZZ2Wel9hwAD7j1lOXe/N9lmJw4BOSPG3KJzo=";
+    public static String HubName = "carserviceapp";
+    public static String HubListenConnectionString = "Endpoint=sb://carserviceapp.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=1JLIi5/kwD8b8qzfylV5HpOAFThcAORBLXlJgI8LUxw=";
 }

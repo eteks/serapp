@@ -110,7 +110,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         clientUsertype.setOnItemSelectedListener(this);
 
         try {
-            mClient = new MobileServiceClient("http://servicapp.azurewebsites.net",this).withFilter(new MainActivity.ProgressFilter());
+            mClient = new MobileServiceClient(
+                    "http://servicapp.azurewebsites.net",
+                    this).withFilter(new MainActivity.ProgressFilter());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -125,21 +127,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
-//        NotificationsManager.handleNotifications(this, SENDER_ID, MyHandler.class);
-//        MobileServiceTable<UsersAuth> mTable = mClient.getTable("user_auth", UsersAuth.class);
-//        try {
-//            final List<UsersAuth> result =  mTable.where().field("username").eq("admin").execute().get();
-//            for (UsersAuth item : result) {
-//                System.out.println(result);
-//            }
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        } catch (ExecutionException e) {
-//            e.printStackTrace();
-//        }
-
-        //System.out.println(item);
-        //mClient.getTable(ToDoItem.class).insert(item.get())
     }
 
 
@@ -207,7 +194,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         @Override
                         protected Void doInBackground(Void... params) {
                             try {
-                                final List<UsersAuth> result = mTable.where().field("username").eq(val(user.username)).and().field("usertype").eq(val(user.usertype)).select("user_password").execute().get();
+                                final List<UsersAuth> result = mTable.where().field("username").eq(val(user.username)).
+                                        and().field("usertype").eq(val(user.usertype)).select("user_password").execute().get();
                                 StringBuilder commaSepValueBuilder = new StringBuilder();
 
                                 //Looping through the list
